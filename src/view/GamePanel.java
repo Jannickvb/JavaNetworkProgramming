@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -21,7 +20,6 @@ public class GamePanel extends JPanel{
 	private GameStateManager gsm;
 	
 	public GamePanel(GameStateManager gsm){
-		this.setPreferredSize(new Dimension(800,600));
 		this.setFocusable(true);
 		this.requestFocus();
 		this.gsm = gsm;

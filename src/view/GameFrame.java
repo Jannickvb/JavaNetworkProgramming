@@ -16,10 +16,11 @@ public class GameFrame extends JFrame{
 
 	public GameFrame(){
 		super("Java network programming");
+		setPreferredSize(new Dimension(800,600));
 		setDefaultCloseOperation(3);
-		setContentPane(new GamePanel(new GameStateManager(new GameController(this))));
 		pack();
 		setLocationRelativeTo(null);
+		setContentPane(new GamePanel(new GameStateManager(new GameController(this))));
 		setVisible(true);
 	}
 }
