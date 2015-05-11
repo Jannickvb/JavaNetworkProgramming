@@ -1,8 +1,8 @@
 package control;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import model.gameStates.CreateState;
 import model.gameStates.GameState;
 import model.gameStates.Level1State;
 import model.gameStates.MenuState;
@@ -17,6 +17,7 @@ public class GameStateManager {
 		this.gameControl = gameControl;
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
+		states.add(new CreateState(this));
 		states.add(new Level1State(this));
 		currentstate = states.get(0);
 	}
@@ -36,7 +37,7 @@ public class GameStateManager {
 	}
 	
 	public void start(){
-		currentstate = states.get(2);
+		currentstate = states.get(3);
 	}
 	
 	public void select(int i){

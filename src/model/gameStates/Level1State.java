@@ -39,4 +39,10 @@ public class Level1State extends GameState{
 		
 	}
 
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
