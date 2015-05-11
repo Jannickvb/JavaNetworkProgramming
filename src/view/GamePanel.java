@@ -10,7 +10,12 @@ import javax.swing.JPanel;
 import control.GameStateManager;
 
 public class GamePanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1186553953937526703L;
 	private GameStateManager gsm;
+	
 	public GamePanel(GameStateManager gsm){
 		this.setFocusable(true);
 		this.requestFocus();
@@ -25,6 +30,7 @@ public class GamePanel extends JPanel{
 				gsm.keyReleased(e);
 			}
 		});
+		
 	}
 	
 	public void paintComponent(Graphics g){

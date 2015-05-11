@@ -1,4 +1,4 @@
-package model;
+package model.gameStates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;

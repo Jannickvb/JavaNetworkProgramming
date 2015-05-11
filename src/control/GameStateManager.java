@@ -3,14 +3,14 @@ package control;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import model.GameState;
-import model.Level1State;
-import model.MenuState;
-import model.ScoreState;
+import model.gameStates.GameState;
+import model.gameStates.Level1State;
+import model.gameStates.MenuState;
+import model.gameStates.ScoreState;
 
 public class GameStateManager {
 	private int index;
-	private GameController gameControl;
+	public GameController gameControl;
 	public GameState currentstate;
 	private ArrayList<GameState> states = new ArrayList<GameState>();
 	public GameStateManager(GameController gameControl){
@@ -18,7 +18,7 @@ public class GameStateManager {
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
 		states.add(new Level1State(this));
-		currentstate = states.get(0);
+		currentstate = states.get(2);
 	}
 	
 	public void next(){
@@ -48,11 +48,11 @@ public class GameStateManager {
 	
 	public void keyPressed(KeyEvent e){
 		currentstate.keyPressed(e);
-		System.out.println("keypressed: " + e.getKeyCode());
+		System.out.println("keypressed: " + e.getKeyChar());
 	}
 	
 	public void keyReleased(KeyEvent e){
 		currentstate.keyReleased(e);
-		System.out.println("keyreleased: " + e.getKeyCode());
+		System.out.println("keyreleased: " + e.getKeyChar());
 	}
 }

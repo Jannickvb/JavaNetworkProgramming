@@ -1,20 +1,23 @@
-package model;
+package model.gameStates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+import model.PlayField;
 import control.GameStateManager;
 
-public class ScoreState extends GameState{
+public class Level1State extends GameState{
 
-	public ScoreState(GameStateManager gsm) {
+	private PlayField pf;
+	
+	public Level1State(GameStateManager gsm) {
 		super(gsm);
-		// TODO Auto-generated constructor stub
+		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
 	}
 
 	@Override
-	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
+	public void draw(Graphics2D g2) {
+		pf.drawGrid(g2);
 		
 	}
 

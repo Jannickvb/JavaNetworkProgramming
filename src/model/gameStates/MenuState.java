@@ -1,13 +1,13 @@
-package model;
+package model.gameStates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import control.GameStateManager;
 
-public class Level1State extends GameState{
+public class MenuState extends GameState{
 
-	public Level1State(GameStateManager gsm) {
+	public MenuState(GameStateManager gsm) {
 		super(gsm);
 		// TODO Auto-generated constructor stub
 	}
