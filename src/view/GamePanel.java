@@ -1,11 +1,15 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import control.GameStateManager;
 
@@ -17,20 +21,34 @@ public class GamePanel extends JPanel{
 	private GameStateManager gsm;
 	
 	public GamePanel(GameStateManager gsm){
+		this.setPreferredSize(new Dimension(800,600));
 		this.setFocusable(true);
 		this.requestFocus();
 		this.gsm = gsm;
+		Timer paintTimer = new Timer(1000/60, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				repaint();
+			}
+		});
+		Timer updateTimer = new Timer(1000/20, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gsm.currentstate.update();
+			}
+		});
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e){
-				gsm.keyPressed(e);
+				gsm.currentstate.keyPressed(e);
 			}
 			@Override
 			public void keyReleased(KeyEvent e){
-				gsm.keyReleased(e);
+				gsm.currentstate.keyReleased(e);
 			}
 		});
-		
+		paintTimer.start();
+		updateTimer.start();
 	}
 	
 	public void paintComponent(Graphics g){

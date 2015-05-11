@@ -26,8 +26,8 @@ public class ScoreState extends GameState{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+			gsm.select(0);
 	}
 
 	@Override

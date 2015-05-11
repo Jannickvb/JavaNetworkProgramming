@@ -18,7 +18,7 @@ public class GameStateManager {
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
 		states.add(new Level1State(this));
-		currentstate = states.get(2);
+		currentstate = states.get(0);
 	}
 	
 	public void next(){
@@ -44,15 +44,5 @@ public class GameStateManager {
 			currentstate = states.get(i);
 		else
 			System.out.println("invalid state");
-	}
-	
-	public void keyPressed(KeyEvent e){
-		currentstate.keyPressed(e);
-		System.out.println("keypressed: " + e.getKeyChar());
-	}
-	
-	public void keyReleased(KeyEvent e){
-		currentstate.keyReleased(e);
-		System.out.println("keyreleased: " + e.getKeyChar());
 	}
 }
