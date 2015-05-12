@@ -19,7 +19,7 @@ public class GameStateManager {
 		states.add(new ScoreState(this));
 		states.add(new CreateState(this));
 		states.add(new Level1State(this));
-		currentstate = states.get(2);
+		currentstate = states.get(3);
 	}
 	
 	public void next(){
