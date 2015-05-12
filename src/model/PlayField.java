@@ -11,8 +11,7 @@ public class PlayField {
 		this.width = width;
 		this.height = height;
 		row = width/tileWidth;
-		colom = height / tileHeight;	
-		System.out.println(row+" - "+colom);
+		colom = height / tileHeight;		
 	}
 	
 	public void drawGrid(Graphics2D g2){	
