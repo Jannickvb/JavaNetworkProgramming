@@ -76,7 +76,14 @@ public class CreateState extends GameState{
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
-			gsm.select(4);
+			if(sm.currentPoints == 0)
+			{
+				gsm.select(3);
+			}
+			else
+			{
+				System.out.println("You didn't use al your points.");
+			}
 		}
 	}
 

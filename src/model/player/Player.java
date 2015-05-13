@@ -1,48 +1,25 @@
 package model.player;
 
+import control.StatManager;
+
 public class Player {
 
-	private int stamina,strength,dexterity,intelligence;
-
-	public Player(int stamina, int strength, int dexterity, int intelligence) {		
-		this.stamina = stamina;
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.intelligence = intelligence;
+	private int[] stats;
+	private String[] statNames;
+	private StatManager sm;
+	public Player(StatManager sm) {	
+		this.sm = sm;
+		this.statNames = sm.getStatNames();
+		this.stats = sm.getStatData();
 	}
 
-	public int getStamina() {
-		return stamina;
+	public int getStat(int i){
+		return stats[i];
 	}
-
-	public void setStamina(int stamina) {
-		this.stamina = stamina;
+	public String getStatName(int i){
+		return statNames[i];
 	}
-
-	public int getStrength() {
-		return strength;
+	public StatManager getStatManager(){
+		return sm;
 	}
-
-	public void setStrength(int strength) {
-		this.strength = strength;
-	}
-
-	public int getDexterity() {
-		return dexterity;
-	}
-
-	public void setDexterity(int dexterity) {
-		this.dexterity = dexterity;
-	}
-
-	public int getIntelligence() {
-		return intelligence;
-	}
-
-	public void setIntelligence(int intelligence) {
-		this.intelligence = intelligence;
-	}
-	
-	
-	
 }

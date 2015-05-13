@@ -3,11 +3,14 @@ package control;
 public class StatManager {
 	
 	private int[] statData;
+	private String[] statNames;
+
 	public int currentPoints;
 	private final int MAXPOINTS = 10;
 	
-	public StatManager(String[] statNames){		
-		statData = new int[statNames.length];		
+	public StatManager(String[] statNames){	
+		this.statNames = statNames;
+		statData = new int[statNames.length];
 		currentPoints = MAXPOINTS;
 	}
 	
@@ -24,7 +27,13 @@ public class StatManager {
 			currentPoints++;
 		}		
 	}
-	
+	public int[] getStatData() {
+		return statData;
+	}
+
+	public String[] getStatNames() {
+		return statNames;
+	}
 	public int getStatAmount(int index){
 		return statData[index];
 	}
