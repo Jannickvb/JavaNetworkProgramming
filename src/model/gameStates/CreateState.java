@@ -18,13 +18,14 @@ public class CreateState extends GameState{
 	@Override
 	public void init() {
 		points = 0;
-		
 	}
 	
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < stats.length; i++){
+			int sWidth = g.getFontMetrics().stringWidth(stats[i]);
+			g.drawString(stats[i], gsm.gameControl.getWidth()/2 - 200, 100 + (50*i));
+		}
 	}
 
 	@Override
@@ -38,6 +39,10 @@ public class CreateState extends GameState{
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
 		{
 			gsm.select(0);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			gsm.select(4);
 		}
 	}
 

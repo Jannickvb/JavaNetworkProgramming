@@ -37,7 +37,7 @@ public class GameStateManager {
 	}
 	
 	public void start(){
-		currentstate = states.get(3);
+		currentstate = states.get(2);
 	}
 	
 	public void select(int i){
