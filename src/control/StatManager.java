@@ -4,10 +4,11 @@ public class StatManager {
 	
 	private int[] statData;
 	public int currentPoints;
+	private final int MAXPOINTS = 10;
 	
-	public StatManager(String[] statNames, int maxPoints){		
+	public StatManager(String[] statNames){		
 		statData = new int[statNames.length];		
-		currentPoints = maxPoints;
+		currentPoints = MAXPOINTS;
 	}
 	
 	public void raiseStat(int index){

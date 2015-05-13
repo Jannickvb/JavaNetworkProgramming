@@ -17,27 +17,16 @@ public class CreateState extends GameState{
 	public CreateState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
-		sm = new StatManager(stats, 10);
+		sm = new StatManager(stats);
 	}
 
 	@Override
 	public void init() {
-<<<<<<< HEAD
-		points = 0;
-=======
-		
-		
->>>>>>> 10fa47b0d3ccb77965aa9db67eb5f2906efe0a28
+				
 	}
 	
 	@Override
 	public void draw(Graphics2D g) {
-<<<<<<< HEAD
-		for(int i = 0; i < stats.length; i++){
-			int sWidth = g.getFontMetrics().stringWidth(stats[i]);
-			g.drawString(stats[i], gsm.gameControl.getWidth()/2 - 200, 100 + (50*i));
-		}
-=======
 		int x = gsm.gameControl.getWidth()/2;
 		int y = 0;
 		int width = 0;
@@ -57,8 +46,6 @@ public class CreateState extends GameState{
 				g.fillRect(width+(j*size*2)+size/2, y-8, size, size);
 			}
 		}
-		
->>>>>>> 10fa47b0d3ccb77965aa9db67eb5f2906efe0a28
 	}
 
 	@Override
