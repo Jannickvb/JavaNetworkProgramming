@@ -3,7 +3,6 @@ package model;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class PlayField {
@@ -11,7 +10,7 @@ public class PlayField {
 	public static final int tileWidth = 25, tileHeight = 25;
 	private int row,column,widthInset,heightInset;
 	public int width,height;
-	public ArrayList<ArrayList<Integer>> coordinates;
+	public ArrayList<ArrayList<PlayerTile>> coordinates;
 	public PlayField(double width, double height){
 		row = (int) Math.round(height/tileHeight);
 		column = (int) Math.round(height/tileWidth);
@@ -19,11 +18,11 @@ public class PlayField {
 		heightInset = (int) height%tileHeight;
 		this.width = (int) (height - widthInset);
 		this.height = (int) (height - heightInset);
-		coordinates = new ArrayList<ArrayList<Integer>>();
-		for(int r = 0; r < row+1; r++){
-			ArrayList<Integer> row = new ArrayList<Integer>();
-			for(int c = 0; c < column+1; c++){
-				row.add(c);
+		coordinates = new ArrayList<ArrayList<PlayerTile>>();
+		for(int r = 0; r < row; r++){
+			ArrayList<PlayerTile> row = new ArrayList<PlayerTile>();
+			for(int c = 0; c < column; c++){
+				row.add(new PlayerTile(r*tileHeight, c*tileHeight, tileHeight, tileHeight));
 			}
 			coordinates.add(row);
 		}
@@ -40,15 +39,21 @@ public class PlayField {
 	}
 	
 	public void drawGrid(Graphics2D g2){
-		for(int y = 0; y < coordinates.size()-1;y++)
+		for(ArrayList<PlayerTile> r: coordinates)
 		{
-			Rectangle rectY = new Rectangle(0, y*tileHeight, tileHeight, tileHeight);
-			g2.draw(rectY);
-			for(int x = 0; x < coordinates.get(x).size()-1;x++){
-				Rectangle rectX = new Rectangle(x*tileHeight, y*tileHeight, tileHeight, tileHeight);
-				g2.draw(rectX);
+			for(PlayerTile tile: r){
+				if(tile.isUsable())
+					g2.setColor(Color.red);
+				else if(tile.isUsedByPlayer())
+					g2.setColor(Color.blue);
+				else
+					g2.setColor(Color.cyan);
+				g2.draw(tile);
+				g2.fill(tile);
 			}
 		}
+		g2.setColor(Color.black);
+		g2.setStroke(new BasicStroke(2));
 		for(int r = 0; r < row+1; r++){
 			g2.drawLine(0, r*tileHeight, height, r*tileHeight);
 		}
