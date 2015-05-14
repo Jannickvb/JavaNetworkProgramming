@@ -2,6 +2,7 @@ package model.gameStates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import model.PlayField;
@@ -16,12 +17,15 @@ public class PlayState extends GameState{
 	private PlayField pf;
 	private GameStateManager gsm;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private ImageController imageControl = ImageController.instance;
+	private ImageController imageControl = new ImageController();
+	private BufferedImage bg;
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
 		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
+		bg = imageControl.getImage(0);
 		test();
+		
 	}
 	/** TEST DATA
 	 * Moet op andere manier geimplementeerd worden
@@ -38,10 +42,12 @@ public class PlayState extends GameState{
 	public void draw(Graphics2D g2) {
 		int width = gsm.gameControl.getWidth();
 		int height = gsm.gameControl.getHeight();
-		g2.translate(width/2 - pf.width/2, height/2 -pf.height/2);
+		g2.translate(width/2,height/2);
+		BufferedImage image = imageControl.getImage(0);
+		g2.drawImage(bg,-1920/2,-1080/2,1920,1080,null);
+		g2.translate(-pf.width/2, -pf.height/2);
 		pf.drawGrid(g2);
 		players.get(0).draw(g2);
-		g2.drawImage(imageControl.getImage(0),0,0,20,20,null);
 	}
 
 	@Override
