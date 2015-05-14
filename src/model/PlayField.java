@@ -27,17 +27,28 @@ public class PlayField {
 			coordinates.add(row);
 		}
 	}
-	
+	/**
+	 * @param column
+	 * @return Integer
+	 * Returns x-coordinate of the tile the player is on.
+	 */
 	public int getXCoordinate(int column){
 		int x = column * tileWidth;
 		return x;
 	}
-	
+	/**
+	 * @param column
+	 * @return Integer
+	 * Returns y-coordinate of the tile the player is on.
+	 */
 	public int getYCoordinate(int row){
 		int y = row * tileHeight;
 		return y;
 	}
-	
+	/**
+	 * @param Graphics2D g2
+	 * Draws the playfield
+	 */
 	public void drawGrid(Graphics2D g2){
 		for(ArrayList<PlayerTile> r: coordinates)
 		{
