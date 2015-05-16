@@ -4,8 +4,7 @@ import java.awt.Rectangle;
 
 public class PlayerTile extends Rectangle{
 	private int x,y,width,height;
-	private boolean isUsedByPlayer,isUsable,selected;
-	
+	private boolean isUsedByPlayer,isUsable,selected;	
 	
 	public PlayerTile(int x, int y, int width, int height){
 		super(x,y,width,height);

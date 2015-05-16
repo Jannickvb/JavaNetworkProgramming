@@ -53,9 +53,10 @@ public class PlayState extends GameState{
 		g2.translate(-pf.width/2, -pf.height/2);		
 		pf.drawGrid(g2);
 		players.get(0).draw(g2);
-		g2.setFont(new Font("Comic sans",Font.BOLD,20));
-		g2.setPaint(Color.RED);
-		g2.drawString("Turn: "+turn, 0, 0);
+		//komt niet op het scher,
+//		g2.setFont(new Font("Comic sans",Font.BOLD,20));
+//		g2.setPaint(Color.RED);
+//		g2.drawString("Turn: "+turn, 0, 0);
 	}
 
 	@Override
@@ -66,8 +67,10 @@ public class PlayState extends GameState{
 	/**
 	 * Deze methode moet nog verplaats worden naar PlayField denk ik.
 	 * Wordt gebruikt om de positie tiles van de Player en het bereik van de Player te updaten.
-	 * Maar als je deze verplaatst naar playfield, moet daar de lijst met players komen. 
-	 * Volgens mijn is de playstate juist de plek die de spelers moet bevatten en is de playfield alleen wat je ziet.
+	 * 
+	 * Maar als je deze verplaatst naar playfield, moet daar de lijst met players komen.
+	 * Volgens mijn is de playstate juist de plek die de spelers moet bevatten 
+	 * en is de playfield alleen wat je ziet waar ze zijn.
 	 */
 	public void updatePlayField(){
 		for(ArrayList<PlayerTile> row: pf.coordinates)
@@ -148,6 +151,10 @@ public class PlayState extends GameState{
 		
 	}
 	
+	/**
+	 * kijkt welke tile geselecteerd is.
+	 * en zet daarna de speler daarnaar toe.
+	 */
 	private void nextTurn() {
 		turn++;
 		for(Player p : players){
