@@ -1,5 +1,7 @@
 package model.gameStates;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -20,6 +22,7 @@ public class PlayState extends GameState{
 	private ImageController imageControl = new ImageController();
 	private BufferedImage bg;
 	private boolean up,down,left,right;
+	private  int turn = 0;
 	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -45,11 +48,14 @@ public class PlayState extends GameState{
 		int width = gsm.gameControl.getWidth();
 		int height = gsm.gameControl.getHeight();
 		g2.translate(width/2,height/2);
-		BufferedImage image = imageControl.getImage(0);
+//		BufferedImage image = imageControl.getImage(0);//wat doe je hiermee?
 		g2.drawImage(bg,-1920/2,-1080/2,1920,1080,null);
-		g2.translate(-pf.width/2, -pf.height/2);
+		g2.translate(-pf.width/2, -pf.height/2);		
 		pf.drawGrid(g2);
 		players.get(0).draw(g2);
+		g2.setFont(new Font("Comic sans",Font.BOLD,20));
+		g2.setPaint(Color.RED);
+		g2.drawString("Turn: "+turn, 0, 0);
 	}
 
 	@Override
@@ -135,10 +141,47 @@ public class PlayState extends GameState{
 			left = false;
 			right = true;
 			break;
+		case KeyEvent.VK_Q:
+			nextTurn();
+			break;
 		}
 		
 	}
 	
+	private void nextTurn() {
+		turn++;
+		for(Player p : players){
+			
+			if(p.isActive()){
+				int x = p.getPlayFieldX();
+				int y = p.getPlayFieldY();
+				PlayerTile selectedTile = null;
+				
+				if(pf.coordinates.get(x+1).get(y).isSelected())
+					selectedTile = pf.coordinates.get(x+1).get(y);
+				
+				if(pf.coordinates.get(x-1).get(y).isSelected())
+					selectedTile = pf.coordinates.get(x-1).get(y);
+				
+				if(pf.coordinates.get(x).get(y+1).isSelected())
+					selectedTile = pf.coordinates.get(x).get(y+1);
+				
+				if(pf.coordinates.get(x).get(y-1).isSelected())
+					selectedTile = pf.coordinates.get(x).get(y-1);
+				
+				if(selectedTile != null){
+					p.setX((int) selectedTile.getMinX());
+					p.setY((int) selectedTile.getMinY());
+				}
+				
+			}
+		}
+		up = false;
+		down = false;
+		right = false;
+		left = false;
+		System.out.println("Turn: "+turn);
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {		
 	}
