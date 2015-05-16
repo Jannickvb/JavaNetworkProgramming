@@ -11,9 +11,7 @@ public class PlayField {
 	private int row,column,widthInset,heightInset;
 	public int width,height;
 	public ArrayList<ArrayList<PlayerTile>> coordinates;
-	
-	public PlayField(double width, double height){	
-		
+	public PlayField(double width, double height){
 		row = (int) Math.round(height/tileHeight);
 		column = (int) Math.round(height/tileWidth);
 		widthInset = (int) width%tileWidth;
@@ -59,8 +57,6 @@ public class PlayField {
 					g2.setColor(Color.red);
 				else if(tile.isUsedByPlayer())
 					g2.setColor(Color.blue);
-				else if(tile.isSelected())
-					g2.setColor(Color.green);
 				else
 					g2.setColor(Color.cyan);
 				g2.draw(tile);

@@ -19,8 +19,6 @@ public class PlayState extends GameState{
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ImageController imageControl = new ImageController();
 	private BufferedImage bg;
-	private boolean up,down,left,right;
-	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
@@ -60,8 +58,6 @@ public class PlayState extends GameState{
 	/**
 	 * Deze methode moet nog verplaats worden naar PlayField denk ik.
 	 * Wordt gebruikt om de positie tiles van de Player en het bereik van de Player te updaten.
-	 * Maar als je deze verplaatst naar playfield, moet daar de lijst met players komen. 
-	 * Volgens mijn is de playstate juist de plek die de spelers moet bevatten en is de playfield alleen wat je ziet.
 	 */
 	public void updatePlayField(){
 		for(ArrayList<PlayerTile> row: pf.coordinates)
@@ -70,7 +66,6 @@ public class PlayState extends GameState{
 			{
 				column.setUsable(false);
 				column.setUsedByPlayer(false);
-				column.setSelected(false);
 			}
 		}
 		for(Player player: players)
@@ -80,67 +75,24 @@ public class PlayState extends GameState{
 				int x = player.getPlayFieldX();
 				int y = player.getPlayFieldY();
 				pf.coordinates.get(x).get(y).setUsedByPlayer(true);
-				
-				if(right){
-					pf.coordinates.get(x+1).get(y).setSelected(true);
-				}else{
-					pf.coordinates.get(x+1).get(y).setUsable(true);
-				}
-				
-				if(left){
-					pf.coordinates.get(x-1).get(y).setSelected(true);
-				}else{
-					pf.coordinates.get(x-1).get(y).setUsable(true);
-				}
-				
-				if(down){
-					pf.coordinates.get(x).get(y+1).setSelected(true);
-				}else{
-					pf.coordinates.get(x).get(y+1).setUsable(true);
-				}
-				
-				if(up){
-					pf.coordinates.get(x).get(y-1).setSelected(true);
-				}else{
-					pf.coordinates.get(x).get(y-1).setUsable(true);
-				}
+				pf.coordinates.get(x+1).get(y).setUsable(true);
+				pf.coordinates.get(x-1).get(y).setUsable(true);
+				pf.coordinates.get(x).get(y+1).setUsable(true);
+				pf.coordinates.get(x).get(y-1).setUsable(true);
 			}
 		}
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch(e.getKeyCode()){
-		case KeyEvent.VK_UP:
-			up = true;
-			down = false;
-			left = false;
-			right = false;
-			break;
-		case KeyEvent.VK_DOWN:
-			up = false;
-			down = true;
-			left = false;
-			right = false;
-			break;
-		case KeyEvent.VK_LEFT:
-			up = false;
-			down = false;
-			left = true;
-			right = false;
-			break;
-		case KeyEvent.VK_RIGHT:
-			up = false;
-			down = false;
-			left = false;
-			right = true;
-			break;
-		}
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void keyReleased(KeyEvent e) {		
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

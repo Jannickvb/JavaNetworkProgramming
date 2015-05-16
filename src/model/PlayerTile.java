@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 
 public class PlayerTile extends Rectangle{
 	private int x,y,width,height;
-	private boolean isUsedByPlayer,isUsable,selected;
-	
+	private boolean isUsedByPlayer;
+	private boolean isUsable;
 	
 	public PlayerTile(int x, int y, int width, int height){
 		super(x,y,width,height);
@@ -30,15 +30,5 @@ public class PlayerTile extends Rectangle{
 	public void setUsable(boolean isUsable) {
 		this.isUsable = isUsable;
 	}
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-	
-	
 	
 }
