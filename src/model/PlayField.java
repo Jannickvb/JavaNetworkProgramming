@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 public class PlayField {
 
-	public static final int tileWidth = 25, tileHeight = 25;
+	public static final int tileWidth = 32, tileHeight = 32;
 	private int row,column,widthInset,heightInset;
 	public int width,height;
 	public ArrayList<ArrayList<PlayerTile>> coordinates;
 	public PlayField(double width, double height){
-		row = (int) Math.round(height/tileHeight);
-		column = (int) Math.round(height/tileWidth);
+//		row = (int) Math.round(height/tileHeight);
+//		column = (int) Math.round(height/tileWidth);
+		row = 17;
+		column = 17;
 		widthInset = (int) width%tileWidth;
 		heightInset = (int) height%tileHeight;
 		this.width = (int) (height - widthInset);
