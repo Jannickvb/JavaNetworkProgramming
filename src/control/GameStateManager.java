@@ -13,8 +13,10 @@ public class GameStateManager {
 	public GameController gameControl;
 	public GameState currentstate;
 	private ArrayList<GameState> states = new ArrayList<GameState>();
-	public GameStateManager(GameController gameControl){
+	public ImageController imageControl;
+	public GameStateManager(GameController gameControl, ImageController imageControl){
 		this.gameControl = gameControl;
+		this.imageControl = imageControl;
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
 		states.add(new CreateState(this));

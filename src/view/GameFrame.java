@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import control.GameController;
 import control.GameStateManager;
+import control.ImageController;
 
 public class GameFrame extends JFrame{
 		
@@ -20,7 +21,7 @@ public class GameFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
-		setContentPane(new GamePanel(new GameStateManager(new GameController(this))));
+		setContentPane(new GamePanel(new GameStateManager(new GameController(this),new ImageController())));
 		setVisible(true);
 	}
 }

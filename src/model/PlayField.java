@@ -50,23 +50,28 @@ public class PlayField {
 	 * Draws the playfield
 	 */
 	public void drawGrid(Graphics2D g2){
+		g2.setStroke(new BasicStroke(0));
 		for(ArrayList<PlayerTile> r: coordinates)
 		{
 			for(PlayerTile tile: r){
 				if(tile.isUsable())
-					g2.setColor(Color.red);
+					g2.setColor(new Color(1f,0f,0f,0.2f));//transparant rood
 				else if(tile.isUsedByPlayer())
-					g2.setColor(Color.blue);
+					g2.setColor(new Color(0.8f,0.8f,0.8f,0.8f));//licht grijs
 				else if(tile.isSelected())
-					g2.setColor(Color.green);
+					g2.setColor(new Color(1f,0f,0f,0.4f));//minder transparant rood
 				else
-					g2.setColor(Color.cyan);
+					g2.setColor(new Color(0.1f,0.1f,0.1f,0.5f));//doorzichtig grijs
 				g2.draw(tile);
 				g2.fill(tile);
 			}
 		}
 		g2.setColor(Color.black);
-		g2.setStroke(new BasicStroke(2));
+		final float dash[] = {5.0f};
+		g2.setStroke(new BasicStroke(1.0f,
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER,
+                10.0f, dash, 0.0f));
 		for(int r = 0; r < row+1; r++){
 			g2.drawLine(0, r*tileHeight, height, r*tileHeight);
 		}

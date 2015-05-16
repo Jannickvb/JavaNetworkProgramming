@@ -1,5 +1,6 @@
 package model.gameStates;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -19,7 +20,7 @@ public class PlayState extends GameState{
 	private PlayField pf;
 	private GameStateManager gsm;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private ImageController imageControl = new ImageController();
+	private ImageController imageControl;
 	private BufferedImage bg;
 	private boolean up,down,left,right;
 	private  int turn = 0;
@@ -27,6 +28,7 @@ public class PlayState extends GameState{
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
+		this.imageControl = gsm.imageControl;
 		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
 		bg = imageControl.getImage(0);
 		test();
@@ -40,28 +42,26 @@ public class PlayState extends GameState{
 	public void test(){
 		String[] temp = {"1","2","3","4"};
 		Player ptest = new Player(pf.getXCoordinate(4), pf.getYCoordinate(8), 25, 25,0, pf,new StatManager(temp));
+		Player ptest2 = new Player(pf.getXCoordinate(8), pf.getYCoordinate(9), 25, 25,0, pf,new StatManager(temp));
 		ptest.setActive(true);
 		players.add(ptest);
+		players.add(ptest2);
 	}
 	@Override
 	public void draw(Graphics2D g2) {
 		int width = gsm.gameControl.getWidth();
 		int height = gsm.gameControl.getHeight();
 		g2.translate(width/2,height/2);
-//		BufferedImage image = imageControl.getImage(0);//wat doe je hiermee?
 		g2.drawImage(bg,-1920/2,-1080/2,1920,1080,null);
 		g2.translate(-pf.width/2, -pf.height/2);		
 		pf.drawGrid(g2);
-		players.get(0).draw(g2);
-		//komt niet op het scher,
-//		g2.setFont(new Font("Comic sans",Font.BOLD,20));
-//		g2.setPaint(Color.RED);
-//		g2.drawString("Turn: "+turn, 0, 0);
+		g2.setStroke(new BasicStroke(1));
+		for(Player p: players)
+			p.draw(g2);
 	}
 
 	@Override
 	public void update() {
-		
 		updatePlayField();
 	}
 	/**
