@@ -51,6 +51,15 @@ public class PlayField {
 	 * @param Graphics2D g2
 	 * Draws the playfield
 	 */
+	public PlayerTile getTile(int x,int y) {
+		PlayerTile tile = null;
+		try{
+			tile = coordinates.get(x).get(y);
+		}catch(Exception e){
+			System.out.println("test");
+		}
+		return tile;
+	}
 	public void drawGrid(Graphics2D g2){
 		g2.setStroke(new BasicStroke(0));
 		for(ArrayList<PlayerTile> r: coordinates)

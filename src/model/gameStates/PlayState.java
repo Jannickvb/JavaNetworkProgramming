@@ -88,30 +88,31 @@ public class PlayState extends GameState{
 			{
 				int x = player.getPlayFieldX();
 				int y = player.getPlayFieldY();
-				pf.coordinates.get(x).get(y).setUsedByPlayer(true);
-				
+				if(pf.getTile(x, y)!=null)
+					pf.getTile(x, y).setUsedByPlayer(true);
+				if(pf.getTile(x+1, y)!=null)
 				if(right){
-					pf.coordinates.get(x+1).get(y).setSelected(true);
+					pf.getTile(x+1,y).setSelected(true);
 				}else{
-					pf.coordinates.get(x+1).get(y).setUsable(true);
+					pf.getTile(x+1,y).setUsable(true);
 				}
-				
+				if(pf.getTile(x-1, y)!=null)
 				if(left){
-					pf.coordinates.get(x-1).get(y).setSelected(true);
+					pf.getTile(x-1,y).setSelected(true);
 				}else{
-					pf.coordinates.get(x-1).get(y).setUsable(true);
+					pf.getTile(x-1,y).setUsable(true);
 				}
-				
+				if(pf.getTile(x, y+1)!=null)
 				if(down){
-					pf.coordinates.get(x).get(y+1).setSelected(true);
+					pf.getTile(x,y+1).setSelected(true);
 				}else{
-					pf.coordinates.get(x).get(y+1).setUsable(true);
+					pf.getTile(x,y+1).setUsable(true);
 				}
-				
+				if(pf.getTile(x, y-1)!=null)
 				if(up){
-					pf.coordinates.get(x).get(y-1).setSelected(true);
+					pf.getTile(x,y-1).setSelected(true);
 				}else{
-					pf.coordinates.get(x).get(y-1).setUsable(true);
+					pf.getTile(x,y-1).setUsable(true);
 				}
 			}
 		}
@@ -163,18 +164,18 @@ public class PlayState extends GameState{
 				int x = p.getPlayFieldX();
 				int y = p.getPlayFieldY();
 				PlayerTile selectedTile = null;
-				
-				if(pf.coordinates.get(x+1).get(y).isSelected())
-					selectedTile = pf.coordinates.get(x+1).get(y);
-				
-				if(pf.coordinates.get(x-1).get(y).isSelected())
-					selectedTile = pf.coordinates.get(x-1).get(y);
-				
-				if(pf.coordinates.get(x).get(y+1).isSelected())
-					selectedTile = pf.coordinates.get(x).get(y+1);
-				
-				if(pf.coordinates.get(x).get(y-1).isSelected())
-					selectedTile = pf.coordinates.get(x).get(y-1);
+				if(pf.getTile(x+1, y)!=null)
+				if(pf.getTile(x+1,y).isSelected())
+					selectedTile = pf.getTile(x+1,y);
+				if(pf.getTile(x-1, y)!=null)
+				if(pf.getTile(x-1,y).isSelected())
+					selectedTile = pf.getTile(x-1,y);
+				if(pf.getTile(x, y+1)!=null)
+				if(pf.getTile(x,y+1).isSelected())
+					selectedTile = pf.getTile(x,y+1);
+				if(pf.getTile(x, y-1)!=null)
+				if(pf.getTile(x,y-1).isSelected())
+					selectedTile = pf.getTile(x,y-1);
 				
 				if(selectedTile != null){
 					p.setX((int) selectedTile.getMinX());
