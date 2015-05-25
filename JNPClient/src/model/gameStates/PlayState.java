@@ -45,16 +45,16 @@ public class PlayState extends GameState{
 	public void test(){
 		String[] temp = {"1","2","3","4"};
 		StatManager p1stats = new StatManager(temp);
-		p1stats.setStat(2, 20);
+		p1stats.setStat(2, 0);
 		Player ptest = new Player(pf.getXCoordinate(4), pf.getYCoordinate(8), 25, 25,0, pf,p1stats);
 		StatManager p2stats = new StatManager(temp);
-		p2stats.setStat(2, 1);
+		p2stats.setStat(2, 2);
 		Player ptest2 = new Player(pf.getXCoordinate(2), pf.getYCoordinate(12), 25, 25,0, pf,p2stats);
 		StatManager p3stats = new StatManager(temp);
-		p3stats.setStat(2, 23);
+		p3stats.setStat(2, 2);
 		Player ptest3 = new Player(pf.getXCoordinate(8), pf.getYCoordinate(9), 25, 25,0, pf,p3stats);
 		StatManager p4stats = new StatManager(temp);
-		p4stats.setStat(2, 0);
+		p4stats.setStat(2, 2);
 		Player ptest4 = new Player(pf.getXCoordinate(11), pf.getYCoordinate(10), 25, 25,0, pf,p4stats);
 		players.add(ptest);
 		players.add(ptest2);
@@ -274,10 +274,10 @@ public class PlayState extends GameState{
 			int pl2Speed = pl2.range;
 			
 			if(pl1Speed > pl2Speed){
-				return 1;
+				return -1;
 			}
 			else if(pl1Speed < pl2Speed){
-				return -1;
+				return 1;
 			}
 			return 0;
 		}
