@@ -1,5 +1,6 @@
 package control;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import model.gameStates.CreateState;
@@ -19,7 +20,7 @@ public class GameStateManager {
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
 		states.add(new CreateState(this));		
-		states.add(new PlayState(this, this.gameControl.getActivePlayersBySession(2)));
+		states.add(new PlayState(this, this.gameControl.getPlayers()));
 		currentstate = states.get(0);
 	}
 	
@@ -41,10 +42,19 @@ public class GameStateManager {
 		currentstate = states.get(2);
 	}
 	
-	public void select(int i){
-		if(i >= 0 || i < states.size())
+	public void select(int i) throws IOException{
+		if(gameControl.getFromServer().ready()){
+			if(gameControl.getFromServer().readLine() == "gimme stats" && i == 2) {
+				currentstate = states.get(i);
+			}
+		}else if(i >= 0 || i < states.size() && i != 2){
 			currentstate = states.get(i);
-		else
+			System.out.println(i);
+		}else 
 			System.out.println("invalid state");
+
+	}
+	public void check(){
+		
 	}
 }

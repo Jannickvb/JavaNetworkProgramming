@@ -2,6 +2,7 @@ package model.gameStates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import control.GameStateManager;
 
@@ -27,7 +28,12 @@ public class ScoreState extends GameState{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-			gsm.select(0);
+			try {
+				gsm.select(0);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 
 	@Override

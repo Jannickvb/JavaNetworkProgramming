@@ -26,12 +26,12 @@ public class PlayState extends GameState{
 	private  int turn = 0,xTile = 0, yTile = 0,currentPlayer = 0;//De xTiles en yTiles bepalen welk vak jeje hebt geselecteerd op het speelveld	
 
 	
-	public PlayState(GameStateManager gsm,ArrayList<Player> activePlayers) {
+	public PlayState(GameStateManager gsm, ArrayList<Player> activePlayers) {
 		super(gsm);
 		this.gsm = gsm;
 		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
 		bg = ImageController.getImage(ImageType.menubg);
-		test();	
+		test();
 	}
 	
 	

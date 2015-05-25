@@ -27,6 +27,17 @@ public class Player extends Entity{
 		init();
 	}
 	
+	public Player(int x,int y,int imageID,StatManager sm){
+		super(x,y,32,32,imageID);
+		this.pf = pf;
+		this.sm = sm;
+		this.x = x;
+		this.y = y;
+		this.statNames = sm.getStatNames();
+		this.stats = sm.getStatData();
+		init();
+	}
+	
 	@Override
 	public void init() {
 		attack = stats[1] * 20;

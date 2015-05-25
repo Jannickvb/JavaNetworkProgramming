@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
+import java.io.IOException;
 
 import control.GameController;
 import control.GameStateManager;
@@ -49,15 +50,20 @@ public class MenuState extends GameState{
 		
 	}
 
-	public void select() {
+	public void select() throws IOException {
 		if(menuIndex == 0){
-			gsm.start();
+			gsm.select(2);
 		}
 		else if(menuIndex == menuItems.length-1){
 			System.exit(0);
 		}
 		else{
-			gsm.select(menuIndex);
+			try {
+				gsm.select(menuIndex);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -65,7 +71,12 @@ public class MenuState extends GameState{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER)
-			select();
+			try {
+				select();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
 			menuIndex--;
