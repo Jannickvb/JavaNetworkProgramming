@@ -27,19 +27,22 @@ public class PlayState extends GameState{
 	private boolean up,down,left,right;
 	private  int turn = 0,currentPlayer = 0;
 	
-	public PlayState(GameStateManager gsm) {
+	public PlayState(GameStateManager gsm,ArrayList<Player> activePlayers) {
 		super(gsm);
 		this.gsm = gsm;
 		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
 		bg = ImageController.getImage(ImageType.menubg);
-		test();
-		
+		test();	
 	}
+	
+	
 	/** TEST DATA
 	 * Moet op andere manier geimplementeerd worden
 	 * De player moet aan een game gekoppeld worden, max 4 spelers per game(denk ik), door de createstate
 	 * Het aantal beschikbare games moet opgehaald worden van de Server
 	*/
+	
+	
 	public void test(){
 		String[] temp = {"1","2","3","4"};
 		StatManager p1stats = new StatManager(temp);

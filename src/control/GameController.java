@@ -18,6 +18,14 @@ public class GameController {
 		this.frame = frame;
 	}
 	
+	public void createNewGame() {
+		
+	}
+	
+	public ArrayList<Player> getActivePlayersBySession(int hashcode){
+		return players;
+	}
+	
 	public void addPlayer(Player player){
 		players.add(player);
 	}

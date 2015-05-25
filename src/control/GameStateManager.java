@@ -13,12 +13,13 @@ public class GameStateManager {
 	public GameController gameControl;
 	public GameState currentstate;
 	private ArrayList<GameState> states = new ArrayList<GameState>();
+	PlayState testState;
 	public GameStateManager(GameController gameControl){
 		this.gameControl = gameControl;
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
-		states.add(new CreateState(this));
-		states.add(new PlayState(this));
+		states.add(new CreateState(this));		
+		states.add(new PlayState(this, this.gameControl.getActivePlayersBySession(2)));
 		currentstate = states.get(0);
 	}
 	
