@@ -1,12 +1,15 @@
 package view;
 
 import java.awt.Dimension;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 
 import control.GameController;
 import control.GameStateManager;
-import control.ImageController;
 
 public class GameFrame extends JFrame{
 		

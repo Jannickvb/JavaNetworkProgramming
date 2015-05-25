@@ -3,7 +3,9 @@ package model.gameStates;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import model.player.Player;
 import control.GameStateManager;
 import control.StatManager;
 
@@ -59,7 +61,12 @@ public class CreateState extends GameState{
 		switch(e.getKeyCode()){
 		
 		case KeyEvent.VK_ESCAPE:
-			gsm.select(0);
+			try {
+				gsm.select(0);
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			break;
 		case KeyEvent.VK_UP:
 			up();
@@ -78,7 +85,18 @@ public class CreateState extends GameState{
 		{
 			if(sm.currentPoints == 0)
 			{
-				gsm.select(3);
+				gsm.gameControl.addPlayer(new Player(3, 4, 0, sm));
+				try {
+					gsm.gameControl.sentPlayerRange(sm.getStatAmount(2));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					gsm.select(3);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else
 			{
