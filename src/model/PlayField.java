@@ -55,8 +55,7 @@ public class PlayField {
 		PlayerTile tile = null;
 		try{
 			tile = coordinates.get(x).get(y);
-		}catch(Exception e){
-			System.out.println("test");
+		}catch(Exception e){			
 		}
 		return tile;
 	}
@@ -65,12 +64,12 @@ public class PlayField {
 		for(ArrayList<PlayerTile> r: coordinates)
 		{
 			for(PlayerTile tile: r){
-				if(tile.isUsable())
-					g2.setColor(new Color(1f,0f,0f,0.2f));//transparant rood
+				if(tile.isSelected())
+					g2.setColor(new Color(1f,0f,0f,0.4f));//minder transparant rood				
 				else if(tile.isUsedByPlayer())
 					g2.setColor(new Color(0.8f,0.8f,0.8f,0.8f));//licht grijs
-				else if(tile.isSelected())
-					g2.setColor(new Color(1f,0f,0f,0.4f));//minder transparant rood
+				else if(tile.isUsable())
+					g2.setColor(new Color(1f,0f,0f,0.2f));//transparant rood
 				else
 					g2.setColor(new Color(0.1f,0.1f,0.1f,0.5f));//doorzichtig grijs
 				g2.draw(tile);
