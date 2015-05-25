@@ -1,8 +1,6 @@
 package model.gameStates;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -23,7 +21,7 @@ public class PlayState extends GameState{
 	private ImageController imageControl;
 	private BufferedImage bg;
 	private boolean up,down,left,right;
-	private  int turn = 0;
+	private  int turn = 0,xTile = 0, yTile = 0;//De xTiles en yTiles bepalen welk vak jeje hebt geselecteerd op het speelveld	
 	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -42,6 +40,7 @@ public class PlayState extends GameState{
 	public void test(){
 		String[] temp = {"1","2","3","4"};
 		Player ptest = new Player(pf.getXCoordinate(4), pf.getYCoordinate(8), 25, 25,0, pf,new StatManager(temp));
+		ptest.range = 1;
 		Player ptest2 = new Player(pf.getXCoordinate(8), pf.getYCoordinate(9), 25, 25,0, pf,new StatManager(temp));
 		ptest.setActive(true);
 		players.add(ptest);
@@ -87,33 +86,74 @@ public class PlayState extends GameState{
 			if(player.isActive())
 			{
 				int x = player.getPlayFieldX();
-				int y = player.getPlayFieldY();
-				if(pf.getTile(x, y)!=null)
+				int y = player.getPlayFieldY();				
+				int range = player.range;				
+				
+				//The vertical and horizontal lines of the player
+				for(int r = 0; r < range+1; r++){
+					if(pf.getTile(x+r, y)!=null)
+					pf.getTile(x+r,y).setUsable(true);
+					if(pf.getTile(x-r, y)!=null)
+					pf.getTile(x-r,y).setUsable(true);
+					if(pf.getTile(x, y+r)!=null)
+					pf.getTile(x,y+r).setUsable(true);
+					if(pf.getTile(x, y-r)!=null)
+					pf.getTile(x,y-r).setUsable(true);
+				}
+				
+				
+				int squareAroundPlayer = range*-1+1;				
+				for(int r = squareAroundPlayer; r < range; r++){
+					for(int c = squareAroundPlayer; c < range; c++){
+						if(pf.getTile(x+r, y+c) != null){
+							pf.getTile(x+r, y+c).setUsable(true);
+						}
+					}
+				}
+				
+				//corner points by range 3 getting removed
+				if(range == 3){
+					int rangePositief = range-1;
+					int rangeNegative = rangePositief*-1;
+					
+					if(pf.getTile(x+rangeNegative, y+rangeNegative)!=null)
+						pf.getTile(x+rangeNegative, y+rangeNegative).setUsable(false);
+					
+					if(pf.getTile(x+rangeNegative, y+rangePositief)!=null)
+						pf.getTile(x+rangeNegative, y+rangePositief).setUsable(false);
+					
+					if(pf.getTile(x+rangePositief, y+rangeNegative)!=null)
+						pf.getTile(x+rangePositief, y+rangeNegative).setUsable(false);
+					
+					if(pf.getTile(x+rangePositief, y+rangePositief)!=null)
+						pf.getTile(x+rangePositief, y+rangePositief).setUsable(false);
+				}
+				
+				if(pf.getTile(x, y) != null){
 					pf.getTile(x, y).setUsedByPlayer(true);
-				if(pf.getTile(x+1, y)!=null)
-				if(right){
-					pf.getTile(x+1,y).setSelected(true);
-				}else{
-					pf.getTile(x+1,y).setUsable(true);
 				}
-				if(pf.getTile(x-1, y)!=null)
-				if(left){
-					pf.getTile(x-1,y).setSelected(true);
-				}else{
-					pf.getTile(x-1,y).setUsable(true);
+				
+				int oldXTile = xTile;
+				int oldYTile = yTile;
+				
+				if(left && xTile > -range){
+					xTile--;					
+				}else if(right && xTile < range){
+					xTile++;					
 				}
-				if(pf.getTile(x, y+1)!=null)
-				if(down){
-					pf.getTile(x,y+1).setSelected(true);
-				}else{
-					pf.getTile(x,y+1).setUsable(true);
+				
+				if(up && yTile > -range){
+					yTile--;					
+				}else if(down && yTile < range){
+					yTile++;					
 				}
-				if(pf.getTile(x, y-1)!=null)
-				if(up){
-					pf.getTile(x,y-1).setSelected(true);
-				}else{
-					pf.getTile(x,y-1).setUsable(true);
+				
+				if(!pf.getTile(x+xTile,y+yTile).isUsable()){
+					xTile = oldXTile;
+					yTile = oldYTile;					
 				}
+				pf.getTile(x+xTile,y+yTile).setSelected(true);
+				resetKeys();
 			}
 		}
 	}
@@ -157,47 +197,49 @@ public class PlayState extends GameState{
 	 * en zet daarna de speler daarnaar toe.
 	 */
 	private void nextTurn() {
-		turn++;
+//		turn++;
 		for(Player p : players){
 			
 			if(p.isActive()){
 				int x = p.getPlayFieldX();
 				int y = p.getPlayFieldY();
 				PlayerTile selectedTile = null;
-				if(pf.getTile(x+1, y)!=null)
-				if(pf.getTile(x+1,y).isSelected())
-					selectedTile = pf.getTile(x+1,y);
-				if(pf.getTile(x-1, y)!=null)
-				if(pf.getTile(x-1,y).isSelected())
-					selectedTile = pf.getTile(x-1,y);
-				if(pf.getTile(x, y+1)!=null)
-				if(pf.getTile(x,y+1).isSelected())
-					selectedTile = pf.getTile(x,y+1);
-				if(pf.getTile(x, y-1)!=null)
-				if(pf.getTile(x,y-1).isSelected())
-					selectedTile = pf.getTile(x,y-1);
-				
+				if(pf.getTile(x+xTile, y+yTile) != null){
+					selectedTile = pf.getTile(x+xTile,y+yTile);
+				}				
 				if(selectedTile != null){
 					p.setX((int) selectedTile.getMinX());
 					p.setY((int) selectedTile.getMinY());
-				}
-				
+				}				
 			}
 		}
-		up = false;
-		down = false;
-		right = false;
-		left = false;
-		System.out.println("Turn: "+turn);
+		resetState();
+//		System.out.println("Turn: "+turn);
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {		
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
+	public void init() {		
 		
+	}
+	
+	private void resetKeys(){
+		up = false;
+		down = false;
+		right = false;
+		left = false;
+	}
+	
+	/**
+	 * Zet de play state weer op de default dus, keys staan allemaal op false en de xTiles en yTiles zijn 0.
+	 * en je costs komen ook weer op de range van je speler
+	 */
+	private void resetState(){
+		resetKeys();
+		xTile = 0;
+		yTile = 0;		
 	}
 
 }
