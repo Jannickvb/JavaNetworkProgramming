@@ -172,14 +172,28 @@ public class PlayState extends GameState{
 					yTile++;					
 				}
 				
-				if(!pf.getTile(x+xTile,y+yTile).isUsable()){
+				if(!pf.getTile(x+xTile,y+yTile).isUsable() || otherPlayerOnTile(x+xTile, y+yTile, player)){
 					xTile = oldXTile;
 					yTile = oldYTile;					
 				}
+				
 				pf.getTile(x+xTile,y+yTile).setSelected(true);
 				resetKeys();
+				
+				
 			}
 		}
+	}
+	
+	private boolean otherPlayerOnTile(int x, int y,Player currentPlayer){
+		for(Player player: players){
+			if(!player.equals(currentPlayer)){
+				if(player.getPlayFieldX() == x && player.getPlayFieldY() == y){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override
@@ -238,6 +252,10 @@ public class PlayState extends GameState{
 			}
 		}
 		resetState();
+		players.get(currentPlayer).setActive(false);
+		currentPlayer++;
+		currentPlayer %= players.size();
+		players.get(currentPlayer).setActive(true);
 //		System.out.println("Turn: "+turn);
 	}
 	@Override
