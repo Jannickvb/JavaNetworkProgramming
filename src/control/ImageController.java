@@ -1,34 +1,39 @@
 package control;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import view.Launcher;
+
 public class ImageController {
 	
-//	public static final ImageController instance = new ImageController();
-	private ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+	public static ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 	
 	public ImageController() {
-		images.add(loadImage("/images/menu_background.jpg"));
-	}
-
-	public BufferedImage getImage(int imageID){
-		return images.get(imageID);
+		
 	}
 	
-	public BufferedImage loadImage(String imagePath){		
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream(imagePath));
-		} catch (IOException e) {
-			System.out.println("Wrong Path");
+	static{
+		try{
+			images.add(ImageIO.read(Launcher.class.getResource("/images/menu_background.jpg")));
+		}catch(IOException e){
+			e.printStackTrace();
 		}
-		return image;
 	}
+	
+	public enum ImageType{
+		menubg
+	}
+	
+	public static BufferedImage getImage(ImageType img){
+		return images.get(img.ordinal());
+	}
+	
+	
+	
 	
 }
+

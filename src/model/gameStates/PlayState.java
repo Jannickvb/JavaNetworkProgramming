@@ -7,12 +7,15 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import model.PlayField;
 import model.PlayerTile;
 import model.player.Player;
 import control.GameStateManager;
 import control.ImageController;
+import control.ImageController.ImageType;
 import control.StatManager;
 
 public class PlayState extends GameState{
@@ -20,17 +23,15 @@ public class PlayState extends GameState{
 	private PlayField pf;
 	private GameStateManager gsm;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private ImageController imageControl;
 	private BufferedImage bg;
 	private boolean up,down,left,right;
-	private  int turn = 0;
+	private  int turn = 0,currentPlayer = 0;
 	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
-		this.imageControl = gsm.imageControl;
 		pf = new PlayField(gsm.gameControl.getWidth(),gsm.gameControl.getHeight());
-		bg = imageControl.getImage(0);
+		bg = ImageController.getImage(ImageType.menubg);
 		test();
 		
 	}
@@ -41,12 +42,27 @@ public class PlayState extends GameState{
 	*/
 	public void test(){
 		String[] temp = {"1","2","3","4"};
-		Player ptest = new Player(pf.getXCoordinate(4), pf.getYCoordinate(8), 25, 25,0, pf,new StatManager(temp));
-		Player ptest2 = new Player(pf.getXCoordinate(8), pf.getYCoordinate(9), 25, 25,0, pf,new StatManager(temp));
-		ptest.setActive(true);
+		StatManager p1stats = new StatManager(temp);
+		p1stats.setStat(2, 20);
+		Player ptest = new Player(pf.getXCoordinate(4), pf.getYCoordinate(8), 25, 25,0, pf,p1stats);
+		StatManager p2stats = new StatManager(temp);
+		p2stats.setStat(2, 1);
+		Player ptest2 = new Player(pf.getXCoordinate(2), pf.getYCoordinate(12), 25, 25,0, pf,p2stats);
+		StatManager p3stats = new StatManager(temp);
+		p3stats.setStat(2, 23);
+		Player ptest3 = new Player(pf.getXCoordinate(8), pf.getYCoordinate(9), 25, 25,0, pf,p3stats);
+		StatManager p4stats = new StatManager(temp);
+		p4stats.setStat(2, 0);
+		Player ptest4 = new Player(pf.getXCoordinate(11), pf.getYCoordinate(10), 25, 25,0, pf,p4stats);
 		players.add(ptest);
 		players.add(ptest2);
+		players.add(ptest3);
+		players.add(ptest4);
+		Collections.sort(players, new PlayerSpeedComparator());
+		players.get(0).setActive(true);
+		System.out.println(players);
 	}
+	
 	@Override
 	public void draw(Graphics2D g2) {
 		int width = gsm.gameControl.getWidth();
@@ -64,6 +80,11 @@ public class PlayState extends GameState{
 	public void update() {
 		updatePlayField();
 	}
+	
+	public ArrayList<Player> getPlayers(){
+		return players;
+	}
+	
 	/**
 	 * Deze methode moet nog verplaats worden naar PlayField denk ik.
 	 * Wordt gebruikt om de positie tiles van de Player en het bereik van de Player te updaten.
@@ -145,7 +166,7 @@ public class PlayState extends GameState{
 			left = false;
 			right = true;
 			break;
-		case KeyEvent.VK_Q:
+		case KeyEvent.VK_ENTER:
 			nextTurn();
 			break;
 		}
@@ -200,4 +221,21 @@ public class PlayState extends GameState{
 		
 	}
 
+	class PlayerSpeedComparator implements Comparator<Player> {
+
+		@Override
+		public int compare(Player pl1, Player pl2) {
+			int pl1Speed = pl1.range;
+			int pl2Speed = pl2.range;
+			
+			if(pl1Speed > pl2Speed){
+				return 1;
+			}
+			else if(pl1Speed < pl2Speed){
+				return -1;
+			}
+			return 0;
+		}
+		
+	}
 }

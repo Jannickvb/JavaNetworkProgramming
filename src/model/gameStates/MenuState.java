@@ -11,14 +11,12 @@ import control.ImageController;
 
 public class MenuState extends GameState{
 	private GameStateManager gsm;
-	private ImageController imageControl;
 	private GameController gameControl;
 	private int stringWidth,menuIndex,spacing = 60;
 	private String[] menuItems = {"Play Game","Highscores","Exit"};
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
 		this.gsm = gsm;
-		this.imageControl = gsm.imageControl;
 		this.gameControl = gsm.gameControl;
 	}
 

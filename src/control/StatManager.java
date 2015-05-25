@@ -31,6 +31,10 @@ public class StatManager {
 		return statData;
 	}
 
+	public void setStat(int stat, int amount) {
+		statData[stat] = amount;
+	}
+	
 	public String[] getStatNames() {
 		return statNames;
 	}

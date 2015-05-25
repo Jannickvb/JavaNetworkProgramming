@@ -90,4 +90,9 @@ public class Player extends Entity{
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		return "Player [attack=" + attack + ", health=" + health + ", range="
+				+ range + ", mana=" + mana + "]";
+	}
 }
