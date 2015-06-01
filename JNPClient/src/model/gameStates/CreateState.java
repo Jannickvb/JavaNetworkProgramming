@@ -85,9 +85,10 @@ public class CreateState extends GameState{
 		{
 			if(sm.currentPoints == 0)
 			{
-				gsm.gameControl.addPlayer(new Player(3, 4, 0, sm));
+				Player player = new Player(3,4,0,sm);
+//				gsm.gameControl.addPlayer(player);
 				try {
-					gsm.gameControl.sentPlayerRange(sm.getStatAmount(2));
+					gsm.gameControl.sentPlayer(player);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

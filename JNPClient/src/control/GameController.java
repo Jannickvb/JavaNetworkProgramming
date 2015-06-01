@@ -1,14 +1,13 @@
 package control;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import model.gameStates.PlayState;
 import model.player.Player;
 import view.GameFrame;
 
@@ -16,8 +15,8 @@ public class GameController {
 	
 	private GameFrame frame;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	
-	private DataOutputStream toServer;
+	private ObjectOutputStream toServer;
+//	private DataOutputStream toServer;
 	private BufferedReader fromServer;
 		
 	public GameController(GameFrame frame){
@@ -31,23 +30,19 @@ public class GameController {
 		      fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		      System.out.println(fromServer.ready());
 		      // Create an output stream to send data to the server
-		      toServer = new DataOutputStream(socket.getOutputStream());
-		      
+//		      toServer = new DataOutputStream(socket.getOutputStream());
+		      toServer = new ObjectOutputStream(socket.getOutputStream());
 		    }
 		    catch (IOException ex) {System.out.println(ex.toString() + '\n');
 		}
-	}
-	
-	public void createNewGame() {
-		
 	}
 	
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 	
-	public void sentPlayerRange(int range) throws IOException{
-		toServer.writeInt(range);
+	public void sentPlayer(Player player) throws IOException{
+		toServer.writeObject(player);
 	}
 	
 	public void addPlayer(Player player){
@@ -69,11 +64,11 @@ public class GameController {
 		this.fromServer = fromServer;
 	}
 
-	public DataOutputStream getToServer() {
+	public ObjectOutputStream getToServer() {
 		return toServer;
 	}
 
-	public void setToServer(DataOutputStream toServer) {
+	public void setToServer(ObjectOutputStream toServer) {
 		this.toServer = toServer;
 	}
 
