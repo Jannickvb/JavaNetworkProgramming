@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import model.player.Player;
+import model.Player;
 import control.GameStateManager;
 import control.StatManager;
 

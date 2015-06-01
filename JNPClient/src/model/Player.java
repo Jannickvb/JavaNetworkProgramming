@@ -1,13 +1,11 @@
-package model.player;
+package model;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-import model.Entity;
-import model.PlayField;
 import control.StatManager;
 
-public class Player extends Entity{
+public class Player{
 
 	private int[] stats;
 	private String[] statNames;
@@ -17,7 +15,6 @@ public class Player extends Entity{
 	public int attack, health, range, mana;
 	private boolean isActive;
 	public Player(int x,int y,int width,int height,int imageID,PlayField pf ,StatManager sm){
-		super(x,y,width,height,imageID);
 		this.pf = pf;
 		this.sm = sm;
 		this.x = x;
@@ -28,8 +25,6 @@ public class Player extends Entity{
 	}
 	
 	public Player(int x,int y,int imageID,StatManager sm){
-		super(x,y,32,32,imageID);
-		this.pf = pf;
 		this.sm = sm;
 		this.x = x;
 		this.y = y;
@@ -38,7 +33,6 @@ public class Player extends Entity{
 		init();
 	}
 	
-	@Override
 	public void init() {
 		attack = stats[1] * 20;
 		health = stats[0] * 10 + 100;
@@ -46,13 +40,11 @@ public class Player extends Entity{
 		mana = stats[3] * 10 + 100;
 	}
 
-	@Override
 	public void draw(Graphics2D g) {
-		g.draw(new Ellipse2D.Double(x, y, width, height));
+		g.draw(new Ellipse2D.Double(x, y, 32, 32));
 		
 	}
 
-	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 	}

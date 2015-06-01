@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import model.player.Player;
+import model.Player;
 import view.GameFrame;
 
 public class GameController {

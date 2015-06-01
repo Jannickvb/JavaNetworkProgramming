@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import model.PlayField;
+import model.Player;
 import model.PlayerTile;
-import model.player.Player;
 import control.GameStateManager;
 import control.ImageController;
 import control.ImageController.ImageType;

@@ -12,6 +12,7 @@ public class Lobby implements Runnable {
 	
 	public CopyOnWriteArrayList<Player> players = new CopyOnWriteArrayList<Player>();
 	public int active = 0;
+	
 	public Lobby(CopyOnWriteArrayList<Player> players) {
 		this.players = players;
 	}
@@ -22,6 +23,10 @@ public class Lobby implements Runnable {
 				players.remove(p);
 			}
 		}
+	}
+	
+	public List<Player> getPlayers(){
+		return players;
 	}
 	
 	@Override

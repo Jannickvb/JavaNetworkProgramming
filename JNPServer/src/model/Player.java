@@ -1,13 +1,9 @@
 package model;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetAddress;
 
-import model.client.Entity;
-import model.client.PlayField;
 import model.client.StatManager;
 
 public class Player{
@@ -19,12 +15,10 @@ public class Player{
 	private int[] stats;
 	private String[] statNames;
 	private StatManager sm;
-	private PlayField pf;
 	private int x,y;
 	public int attack, health, range, mana;
 	private boolean isActive;
 	public Player(Player player){
-		this.pf = player.pf;
 		this.sm = player.sm;
 		this.x = player.x;
 		this.y = player.y;
@@ -36,8 +30,7 @@ public class Player{
 		this.output = output;
 		ready = false;
 	}
-	public Player(int x,int y,int width,int height,int imageID,PlayField pf ,StatManager sm){
-		this.pf = pf;
+	public Player(int x,int y,int width,int height,int imageID,StatManager sm){
 		this.sm = sm;
 		this.x = x;
 		this.y = y;
@@ -71,12 +64,12 @@ public class Player{
 	}
 	
 	public int getPlayFieldX(){
-		int pfX = x / PlayField.tileWidth;
+		int pfX = x / 32;
 		return pfX;
 	}
 	
 	public int getPlayFieldY(){
-		int pfY = y / PlayField.tileHeight;
+		int pfY = y / 32;
 		return pfY;
 	}
 	
