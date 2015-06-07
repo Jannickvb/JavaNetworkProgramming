@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import model.gameStates.CreateState;
 import model.gameStates.GameState;
-import model.gameStates.PlayState;
 import model.gameStates.MenuState;
+import model.gameStates.PlayState;
 import model.gameStates.ScoreState;
 
 public class GameStateManager {
@@ -14,13 +14,12 @@ public class GameStateManager {
 	public GameController gameControl;
 	public GameState currentstate;
 	private ArrayList<GameState> states = new ArrayList<GameState>();
-	PlayState testState;
+
 	public GameStateManager(GameController gameControl){
 		this.gameControl = gameControl;
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
-		states.add(new CreateState(this));		
-		states.add(new PlayState(this, this.gameControl.getPlayers()));
+		states.add(new CreateState(this));
 		currentstate = states.get(0);
 	}
 	
@@ -54,6 +53,13 @@ public class GameStateManager {
 			System.out.println("invalid state");
 
 	}
+	
+	public void initPlayState(){
+		if(gameControl.gameReady) {
+			states.add(new PlayState(this, this.gameControl.getPlayers()));
+		}
+	}
+	
 	public void check(){
 		
 	}

@@ -1,13 +1,13 @@
 package control;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import model.Lobby;
 import model.Player;
 import view.GameFrame;
 
@@ -15,10 +15,11 @@ public class GameController {
 	
 	private GameFrame frame;
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private Lobby currentLobby;
 	private ObjectOutputStream toServer;
 //	private DataOutputStream toServer;
 	private BufferedReader fromServer;
-		
+	public boolean gameReady = false;
 	public GameController(GameFrame frame){
 		this.frame = frame;
 
@@ -39,6 +40,10 @@ public class GameController {
 	
 	public ArrayList<Player> getPlayers(){
 		return players;
+	}
+	
+	public Lobby getCurrentLobby(){
+		return currentLobby;
 	}
 	
 	public void sentPlayer(Player player) throws IOException{
