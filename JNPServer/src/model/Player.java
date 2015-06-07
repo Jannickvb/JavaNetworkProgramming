@@ -2,6 +2,8 @@ package model;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 
@@ -10,8 +12,8 @@ import model.client.StatManager;
 public class Player implements Serializable{
 	
 	private InetAddress inet;
-	private DataInputStream input;
-	private DataOutputStream output;
+	private ObjectInputStream input;
+	private ObjectOutputStream output;
 	private boolean ready;
 	private int[] stats;
 	private String[] statNames;
@@ -25,10 +27,10 @@ public class Player implements Serializable{
 		this.y = player.y;
 	}
 	
-	public Player(InetAddress inet, DataInputStream input, DataOutputStream output) {
+	public Player(InetAddress inet, ObjectInputStream inputFromClient, ObjectOutputStream outputToClient) {
 		this.inet = inet;
-		this.input = input;
-		this.output = output;
+		this.input = inputFromClient;
+		this.output = outputToClient;
 		ready = false;
 	}
 	public Player(int x,int y,int width,int height,int imageID,StatManager sm){
@@ -120,19 +122,19 @@ public class Player implements Serializable{
 		this.inet = inet;
 	}
 
-	public DataInputStream getInput() {
+	public ObjectInputStream getInput() {
 		return input;
 	}
 
-	public void setInput(DataInputStream input) {
+	public void setInput(ObjectInputStream input) {
 		this.input = input;
 	}
 
-	public DataOutputStream getOutput() {
+	public ObjectOutputStream getOutput() {
 		return output;
 	}
 
-	public void setOutput(DataOutputStream output) {
+	public void setOutput(ObjectOutputStream output) {
 		this.output = output;
 	}
 

@@ -43,6 +43,7 @@ public class Lobby implements Runnable {
 				if (!p.isReady()) {
 					try {
 						p.setRange(p.getInput().readInt());
+//						System.out.println(p.getStatManager().getStatData());
 						Collections.sort(players, new PlayerSpeedComparator());
 						p.setReady(true);
 						System.out.println("player is ready");

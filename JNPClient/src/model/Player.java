@@ -102,7 +102,6 @@ public class Player implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Player [attack=" + attack + ", health=" + health + ", range="
-				+ range + ", mana=" + mana + "]";
+		return "player";
 	}
 }

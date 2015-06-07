@@ -60,7 +60,6 @@ public class PlayState extends GameState{
 		players.add(ptest2);
 		players.add(ptest3);
 		players.add(ptest4);
-		Collections.sort(players, new PlayerSpeedComparator());
 		players.get(0).setActive(true);
 		System.out.println(players);
 	}
@@ -137,20 +136,20 @@ public class PlayState extends GameState{
 				
 				//corner points by range 3 getting removed
 				if(range == 3){
-					int rangePositief = range-1;
-					int rangeNegative = rangePositief*-1;
+					int rangePositive = range-1;
+					int rangeNegative = rangePositive*-1;
 					
 					if(pf.getTile(x+rangeNegative, y+rangeNegative)!=null)
 						pf.getTile(x+rangeNegative, y+rangeNegative).setUsable(false);
 					
-					if(pf.getTile(x+rangeNegative, y+rangePositief)!=null)
-						pf.getTile(x+rangeNegative, y+rangePositief).setUsable(false);
+					if(pf.getTile(x+rangeNegative, y+rangePositive)!=null)
+						pf.getTile(x+rangeNegative, y+rangePositive).setUsable(false);
 					
-					if(pf.getTile(x+rangePositief, y+rangeNegative)!=null)
-						pf.getTile(x+rangePositief, y+rangeNegative).setUsable(false);
+					if(pf.getTile(x+rangePositive, y+rangeNegative)!=null)
+						pf.getTile(x+rangePositive, y+rangeNegative).setUsable(false);
 					
-					if(pf.getTile(x+rangePositief, y+rangePositief)!=null)
-						pf.getTile(x+rangePositief, y+rangePositief).setUsable(false);
+					if(pf.getTile(x+rangePositive, y+rangePositive)!=null)
+						pf.getTile(x+rangePositive, y+rangePositive).setUsable(false);
 				}
 				
 				if(pf.getTile(x, y) != null){
@@ -284,21 +283,4 @@ public class PlayState extends GameState{
 		yTile = 0;		
 	}
 
-	class PlayerSpeedComparator implements Comparator<Player> {
-
-		@Override
-		public int compare(Player pl1, Player pl2) {
-			int pl1Speed = pl1.range;
-			int pl2Speed = pl2.range;
-			
-			if(pl1Speed > pl2Speed){
-				return -1;
-			}
-			else if(pl1Speed < pl2Speed){
-				return 1;
-			}
-			return 0;
-		}
-		
-	}
 }

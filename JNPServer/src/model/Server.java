@@ -1,7 +1,7 @@
 package model;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -32,13 +32,20 @@ public class Server {
 				InetAddress adres = socket.getInetAddress();
 			
 				// Create data input and output streams
-	            DataInputStream inputFromClient = new DataInputStream(
+	            ObjectInputStream inputFromClient = new ObjectInputStream(
 	                    socket.getInputStream());
-	            DataOutputStream outputToClient = new DataOutputStream(
+	            ObjectOutputStream outputToClient = new ObjectOutputStream(
 	                    socket.getOutputStream());
 	            
-	            
-	            players.add(new Player(adres, inputFromClient, outputToClient));
+	            try {
+					if(inputFromClient.readObject().toString().equals("player")){
+						players.add(new Player((Player) inputFromClient.readObject()));
+						System.out.println("added player");
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	            
 	            if(players.size() == 4)
 	            {

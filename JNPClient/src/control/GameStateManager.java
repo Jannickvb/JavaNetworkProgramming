@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.gameStates.CreateState;
 import model.gameStates.GameState;
+import model.gameStates.LoadingState;
 import model.gameStates.MenuState;
 import model.gameStates.PlayState;
 import model.gameStates.ScoreState;
@@ -20,6 +21,7 @@ public class GameStateManager {
 		states.add(new MenuState(this));
 		states.add(new ScoreState(this));
 		states.add(new CreateState(this));
+		states.add(new LoadingState(this));
 		currentstate = states.get(0);
 	}
 	
