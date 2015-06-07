@@ -3,10 +3,15 @@ package model;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayField {
+public class PlayField implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4091554744676318142L;
 	public static final int tileWidth = 32, tileHeight = 32;
 	private int row,column,widthInset,heightInset;
 	public int width,height;

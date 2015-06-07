@@ -2,11 +2,16 @@ package model;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 import control.StatManager;
 
-public class Player{
+public class Player implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -898647232748747319L;
 	private int[] stats;
 	private String[] statNames;
 	private StatManager sm;

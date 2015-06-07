@@ -1,13 +1,10 @@
 package model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import model.Player;
 public class Lobby implements Runnable {
 	
 	public CopyOnWriteArrayList<Player> players = new CopyOnWriteArrayList<Player>();

@@ -1,7 +1,13 @@
 package control;
 
-public class StatManager {
+import java.io.Serializable;
+
+public class StatManager implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2876694410312964727L;
 	private int[] statData;
 	private String[] statNames;
 

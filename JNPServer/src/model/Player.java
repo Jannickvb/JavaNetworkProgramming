@@ -2,11 +2,12 @@ package model;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.Serializable;
 import java.net.InetAddress;
 
 import model.client.StatManager;
 
-public class Player{
+public class Player implements Serializable{
 	
 	private InetAddress inet;
 	private DataInputStream input;
