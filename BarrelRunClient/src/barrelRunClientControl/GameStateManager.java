@@ -15,13 +15,13 @@ import barrelRunClientModel.gameState.PlayState;
 
 public class GameStateManager {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private List<GameState> gameStates;
 	public GameState currentState;
 	public BarrelRunClient client;
 	
 	public GameStateManager(JFrame frame) {
-		this.frame = frame;
+		GameStateManager.frame = frame;
 		gameStates = new ArrayList<GameState>();
 		gameStates.add(new MenuState(this));
 		gameStates.add(new LoadingState(this));
@@ -44,15 +44,15 @@ public class GameStateManager {
 		}
 	}
 	
-	public int getWidth(){
+	public static int getWidth(){
 		return frame.getContentPane().getWidth();
 	}
 	
-	public int getHeight(){
+	public static int getHeight(){
 		return frame.getContentPane().getHeight();
 	}
 	
 	public void makeClient(){
 		client = new BarrelRunClient();
-	}
+	}	
 }

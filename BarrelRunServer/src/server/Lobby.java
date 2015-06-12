@@ -19,13 +19,10 @@ public class Lobby implements Runnable {
 	public void run() {
 		try{
 //		System.out.println("ID: "+id+"\tis running\tPlayer size: "+players.length);
-//			for(Player p : players){				
-//					p.toClient.writeUTF("go");
-//			}
-			for(int i = 0; i < players.length; i++){
-				players[i].toClient.writeUTF("go");
-				players[i].toClient.writeInt(i);
-			}
+			for(int i = 0; i < players.length; i++){				
+					players[i].toClient.writeUTF("go");
+					players[i].toClient.writeInt(i);
+			}			
 		}catch(IOException e){
 			e.printStackTrace();
 		}	

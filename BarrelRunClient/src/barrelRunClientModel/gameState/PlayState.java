@@ -11,6 +11,7 @@ import barrelRunClientModel.Ship;
 public class PlayState extends GameState {
 
 	private Ship ship;
+	private int id;
 	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -18,10 +19,15 @@ public class PlayState extends GameState {
 	}
 
 	@Override
-	public void draw(Graphics2D g2) {
-		g2.setColor(Color.RED);
-		g2.fillRect(gsm.getWidth()/2-25, gsm.getHeight()/2-25, 50, 50);
-
+	public void draw(Graphics2D g2) {		
+		if(ship != null){
+			if(id == 0){
+				g2.setColor(Color.BLUE);
+			}else if(id == 1){
+				g2.setColor(Color.RED);
+			}
+			g2.fill(ship.getShip());
+		}
 	}
 
 	@Override
@@ -44,8 +50,12 @@ public class PlayState extends GameState {
 
 	@Override
 	public void init()throws IOException {
-		System.out.println(gsm.client.fromServer.readInt());
-		
-	}
-
+//		System.out.println(gsm.client.fromServer.readInt());
+		id = gsm.client.fromServer.readInt();
+		if(id == 0){
+			ship = new Ship(Ship.player1);
+		}else if(id == 1){
+			ship = new Ship(Ship.player2);
+		}
+	}	
 }
