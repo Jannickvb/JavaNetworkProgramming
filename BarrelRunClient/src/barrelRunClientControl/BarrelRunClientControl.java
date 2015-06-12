@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.Timer;
 
@@ -30,7 +31,11 @@ public class BarrelRunClientControl implements KeyListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				gsm.currentState.update();				
+				try {
+					gsm.currentState.update();
+				} catch (IOException e) {					
+					e.printStackTrace();
+				}				
 			}
 		});
 		paint.start();

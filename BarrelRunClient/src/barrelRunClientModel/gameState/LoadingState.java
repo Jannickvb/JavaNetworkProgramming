@@ -2,8 +2,10 @@ package barrelRunClientModel.gameState;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import barrelRunClientControl.GameStateManager;
+import barrelRunClientControl.GameStateManager.StateType;
 
 public class LoadingState extends GameState {
 
@@ -19,8 +21,9 @@ public class LoadingState extends GameState {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void update()throws IOException{
+		if(gsm.client.fromServer.readUTF().equals("go"))
+			gsm.setState(StateType.play);		
 
 	}
 

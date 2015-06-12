@@ -1,28 +1,43 @@
 package server;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
-import javax.swing.Timer;
-
-public class Lobby implements ActionListener {
+public class Lobby implements Runnable {
 
 	private int id;
-	private List<Player> players;
-	public Timer timer;	
+	private Player[]players;
+	private boolean isRunning;
 	
-	public Lobby(List<Player> playerList) {
+	public Lobby(List<Player> playerList) {		
 		id = (int) (Math.random()*1000+1);
-		this.players = playerList;
-		timer = new Timer(1000/30, this);
-		timer.start();
+		players = new Player[playerList.size()];
+		for(int i = 0; i < playerList.size(); i++){
+			players[i] = playerList.get(i);
+		}
+		isRunning = true;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		//game logic	
-		System.out.println("ID: "+id+"\tis running\tPlayer size: "+players.size());
+	public void run() {
+		try{
+//		System.out.println("ID: "+id+"\tis running\tPlayer size: "+players.length);
+			for(Player p : players){				
+					p.toClient.writeUTF("go");
+				}
+		}catch(IOException e){
+			e.printStackTrace();
+		}		
+		isRunning = false;
 	}
 
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
+	
 }

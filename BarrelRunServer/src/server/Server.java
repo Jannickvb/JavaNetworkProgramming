@@ -27,11 +27,12 @@ public class Server {
 			 while(true){
 				 Socket socket = server.accept();
 				 ss.jta.append("\nClient is connected"+socket.getLocalAddress());
-				 playerList.add(new Player(socket.getInputStream(),socket.getOutputStream()));
-				 
-				 if(playerList.size() == 2){
+				 playerList.add(new Player(socket.getInputStream(),socket.getOutputStream()));				 
+				
+				 if(playerList.size() == 2){					 
 					 Lobby lobby = new Lobby(playerList);
-					
+					 Thread thread = new Thread(lobby);
+					 thread.start();					 
 					 lobbys.add(lobby);					 
 					 playerList.clear();					 
 					
@@ -39,11 +40,12 @@ public class Server {
 				 if(!lobbys.isEmpty()){
 					Iterator<Lobby> lobbyIterator = lobbys.iterator();
 					while(lobbyIterator.hasNext()){					
-						if(!lobbyIterator.next().timer.isRunning()){
+						if(!lobbyIterator.next().isRunning()){
 							lobbyIterator.remove();
 						}
 					}
 				 }
+				 ss.jta.append("\nLobby list: "+lobbys.size());
 			 }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
