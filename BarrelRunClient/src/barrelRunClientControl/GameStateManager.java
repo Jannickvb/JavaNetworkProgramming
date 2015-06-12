@@ -1,5 +1,6 @@
 package barrelRunClientControl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,12 @@ public class GameStateManager {
 	
 	public void setState(StateType type){
 		currentState = gameStates.get(type.ordinal());
-		currentState.init();
+		try {
+			currentState.init();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public int getWidth(){

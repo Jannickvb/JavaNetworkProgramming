@@ -36,15 +36,13 @@ public class Server {
 					 lobbys.add(lobby);					 
 					 playerList.clear();					 
 					
-				 }
-				 if(!lobbys.isEmpty()){
-					Iterator<Lobby> lobbyIterator = lobbys.iterator();
-					while(lobbyIterator.hasNext()){					
-						if(!lobbyIterator.next().isRunning()){
-							lobbyIterator.remove();
-						}
+				 }				 
+				Iterator<Lobby> lobbyIterator = lobbys.iterator();
+				while(lobbyIterator.hasNext()){					
+					if(!lobbyIterator.next().isRunning()){
+						lobbyIterator.remove();
 					}
-				 }
+				}				 
 				 ss.jta.append("\nLobby list: "+lobbys.size());
 			 }
 		} catch (IOException e) {

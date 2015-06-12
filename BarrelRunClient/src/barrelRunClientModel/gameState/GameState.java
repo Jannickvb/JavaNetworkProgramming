@@ -14,7 +14,7 @@ public abstract class GameState {
 		this.gsm = gsm;
 	}
 	
-	public abstract void init();
+	public abstract void init() throws IOException;
 	public abstract void draw(Graphics2D g2);
 	public abstract void update()throws IOException ;
 	public abstract void keyPressed(KeyEvent e);

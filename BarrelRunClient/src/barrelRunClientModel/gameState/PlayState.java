@@ -3,11 +3,15 @@ package barrelRunClientModel.gameState;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import barrelRunClientControl.GameStateManager;
+import barrelRunClientModel.Ship;
 
 public class PlayState extends GameState {
 
+	private Ship ship;
+	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 		// TODO Auto-generated constructor stub
@@ -39,8 +43,8 @@ public class PlayState extends GameState {
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
+	public void init()throws IOException {
+		System.out.println(gsm.client.fromServer.readInt());
 		
 	}
 
