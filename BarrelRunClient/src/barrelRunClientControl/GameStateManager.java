@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import barrelRunClientModel.BarrelRunClient;
 import barrelRunClientModel.gameState.EndState;
 import barrelRunClientModel.gameState.GameState;
 import barrelRunClientModel.gameState.LoadingState;
@@ -16,6 +17,7 @@ public class GameStateManager {
 	private JFrame frame;
 	private List<GameState> gameStates;
 	public GameState currentState;
+	public BarrelRunClient client;
 	
 	public GameStateManager(JFrame frame) {
 		this.frame = frame;
@@ -33,6 +35,7 @@ public class GameStateManager {
 	
 	public void setState(StateType type){
 		currentState = gameStates.get(type.ordinal());
+		currentState.init();
 	}
 	
 	public int getWidth(){
@@ -41,5 +44,9 @@ public class GameStateManager {
 	
 	public int getHeight(){
 		return frame.getContentPane().getHeight();
+	}
+	
+	public void makeClient(){
+		client = new BarrelRunClient();
 	}
 }

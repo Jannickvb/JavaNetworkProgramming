@@ -38,4 +38,10 @@ public class PlayState extends GameState {
 
 	}
 
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

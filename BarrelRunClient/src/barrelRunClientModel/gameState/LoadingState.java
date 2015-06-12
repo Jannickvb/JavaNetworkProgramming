@@ -36,4 +36,9 @@ public class LoadingState extends GameState {
 
 	}
 
+	@Override
+	public void init() {
+		gsm.makeClient();		
+	}
+
 }

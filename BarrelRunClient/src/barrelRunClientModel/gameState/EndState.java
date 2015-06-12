@@ -36,4 +36,10 @@ public class EndState extends GameState {
 
 	}
 
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

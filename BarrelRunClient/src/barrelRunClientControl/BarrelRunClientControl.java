@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
+import barrelRunClientModel.BarrelRunClient;
 import barrelRunClientModel.BarrelRunClientModel;
 import barrelRunClientView.BarrelRunClientView;
 
@@ -15,7 +16,7 @@ public class BarrelRunClientControl implements KeyListener{
 	private GameStateManager gsm;
 	private BarrelRunClientModel model;
 	private BarrelRunClientView view;
-	private Timer update,paint;
+	private Timer update,paint;	
 	
 	public BarrelRunClientControl(GameStateManager gsm, BarrelRunClientModel model,BarrelRunClientView view) {
 		this.gsm = gsm;
@@ -50,5 +51,5 @@ public class BarrelRunClientControl implements KeyListener{
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}
+	}	
 }

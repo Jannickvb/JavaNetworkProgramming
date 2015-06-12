@@ -8,7 +8,7 @@ import barrelRunClientControl.GameStateManager.StateType;
 
 public class MenuState extends GameState {
 
-	private String startString = "Press enter to start";
+	private String startString;
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
 		// TODO Auto-generated constructor stub
@@ -40,6 +40,11 @@ public class MenuState extends GameState {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void init() {
+		startString = "Press enter to start";		
 	}
 
 }
