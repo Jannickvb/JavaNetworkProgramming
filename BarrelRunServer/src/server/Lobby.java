@@ -23,7 +23,7 @@ public class Lobby implements Runnable {
 					players[i].toClient.writeUTF("go");
 					players[i].toClient.writeInt(i);
 			}
-			double player1X,player2X,barrelX,barrelY,boundWidth = 800,boundHeight = 128;
+			double player1X,player2X,barrelX,barrelY,boundWidth = 800-103,boundHeight = 128;
 			String barrelPosition = "";
 			while(isRunning){
 				//haal de coordinaten op vanuit de clients

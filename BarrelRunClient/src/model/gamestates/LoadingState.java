@@ -8,8 +8,6 @@ import control.ControlManager;
 import control.GameStateManager.StateType;
 
 public class LoadingState extends GameState {
-
-	private String loadingString = "Waiting for other player";
 	
 	public LoadingState(ControlManager cm) {
 		super(cm);		
@@ -17,8 +15,9 @@ public class LoadingState extends GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawString(loadingString, cm.getGameStateManager().getWidth()/2-g2.getFontMetrics().stringWidth(loadingString)/2, 
-									cm.getGameStateManager().getHeight()/2);
+		g2.drawString("Waiting for other player",
+					  cm.getGameStateManager().getWidth()/2-g2.getFontMetrics().stringWidth("Waiting for other player")/2, 
+					  cm.getGameStateManager().getHeight()/2);
 	}
 
 	@Override
@@ -27,8 +26,8 @@ public class LoadingState extends GameState {
 			if(cm.getGameStateManager().client.fromServer.readUTF().equals("go")){
 				cm.getGameStateManager().setState(StateType.play);
 			}
-		} catch (IOException e) {			
-			e.printStackTrace();
+		} catch (Exception e) {			
+			System.out.println("Can't connect to server");
 		}
 	}
 

@@ -30,7 +30,6 @@ public class MenuState extends GameState {
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_ENTER:
-			System.out.println(StateType.wait);
 			cm.getGameStateManager().setState(StateType.wait);
 			break;
 		}

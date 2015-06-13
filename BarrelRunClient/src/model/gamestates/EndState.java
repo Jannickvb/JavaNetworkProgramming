@@ -13,9 +13,14 @@ public class EndState extends GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-
+		drawCenteredText("GAME OVER",300,g2);
 	}
 
+	public void drawCenteredText(String text,int y, Graphics2D g2){
+		int stringWidth = g2.getFontMetrics().stringWidth(text);
+		g2.drawString(text, cm.getGameStateManager().getWidth()/2-stringWidth/2, y);
+	}
+	
 	@Override
 	public void update() {
 

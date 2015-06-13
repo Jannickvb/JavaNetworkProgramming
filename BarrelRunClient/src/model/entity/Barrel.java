@@ -28,8 +28,10 @@ public class Barrel extends Entity {
 	
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawImage(currentImage, null, (int) position.getX(),
-				(int) position.getY());
+		g2.drawImage(currentImage, null,
+					(int) position.getX(),
+					(int) position.getY());
+		g2.draw(bounds);
 	};
 
 	@Override

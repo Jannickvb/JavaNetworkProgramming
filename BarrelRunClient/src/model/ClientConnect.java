@@ -17,7 +17,7 @@ public class ClientConnect {
 			fromServer = new DataInputStream(socket.getInputStream());
 			toServer = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {			
-			e.printStackTrace();
+			System.err.println(e);
 		}
 	}
 }
