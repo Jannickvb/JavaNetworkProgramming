@@ -27,15 +27,14 @@ public class BarrelRunClientControl implements KeyListener{
 				view.repaint();
 			}
 		});
-		update = new Timer(1000/30, new ActionListener() {
-			
+		update = new Timer(1000/30, new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					gsm.currentState.update();
 				} catch (IOException e) {					
 					e.printStackTrace();
-				}				
+				}
 			}
 		});
 		paint.start();

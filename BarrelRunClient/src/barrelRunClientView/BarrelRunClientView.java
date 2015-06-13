@@ -24,6 +24,6 @@ public class BarrelRunClientView extends JPanel {
 	protected void paintComponent(Graphics g) {		
 		super.paintComponent(g);
 		
-		gsm.currentState.draw(((Graphics2D)g));
+		gsm.currentState.draw(((Graphics2D) g));
 	}
 }

@@ -17,7 +17,7 @@ public class LoadingState extends GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawString(loadingString, gsm.getWidth()/2-g2.getFontMetrics().stringWidth(loadingString)/2, gsm.getHeight()/2);
+		g2.drawString(loadingString, GameStateManager.getWidth()/2-g2.getFontMetrics().stringWidth(loadingString)/2, GameStateManager.getHeight()/2);
 	}
 
 	@Override

@@ -38,8 +38,7 @@ public class GameStateManager {
 		currentState = gameStates.get(type.ordinal());
 		try {
 			currentState.init();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 	}
