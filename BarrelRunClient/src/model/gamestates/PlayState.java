@@ -24,15 +24,15 @@ public class PlayState extends GameState {
 		g2.drawLine(GameStateManager.getWidth()/2, 0, GameStateManager.getWidth()/2, GameStateManager.getHeight());
 		if(player1 != null){
 			if(id == 0){
-				g2.setColor(Color.BLUE);
-				g2.fill(player1.getShip());
 				g2.setColor(Color.RED);
 				g2.fill(player2.getShip());
+				g2.setColor(Color.BLUE);
+				g2.fill(player1.getShip());				
 			}else if(id == 1){
-				g2.setColor(Color.RED);
-				g2.fill(player1.getShip());
 				g2.setColor(Color.BLUE);
 				g2.fill(player2.getShip());
+				g2.setColor(Color.RED);
+				g2.fill(player1.getShip());				
 			}			
 		}		
 	}
