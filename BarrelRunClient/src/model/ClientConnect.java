@@ -5,13 +5,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class BarrelRunClient {
+public class ClientConnect {
 
 	private Socket socket;
 	public DataInputStream fromServer;
 	public DataOutputStream toServer;
 	
-	public BarrelRunClient() {
+	public ClientConnect() {
 		try {
 			socket = new Socket("LocalHost",8000);
 			fromServer = new DataInputStream(socket.getInputStream());

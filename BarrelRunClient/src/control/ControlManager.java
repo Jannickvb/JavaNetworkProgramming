@@ -9,8 +9,8 @@ import java.io.IOException;
 
 import javax.swing.Timer;
 
-import model.BarrelRunClient;
-import model.BarrelRunClientModel;
+import model.ClientConnect;
+import model.ClientConnect;
 import view.GameFrame;
 import view.GamePanel;
 

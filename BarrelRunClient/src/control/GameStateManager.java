@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import model.BarrelRunClient;
+import model.ClientConnect;
 import model.gamestates.EndState;
 import model.gamestates.GameState;
 import model.gamestates.LoadingState;
@@ -19,7 +19,7 @@ public class GameStateManager {
 	private static GameFrame frame;
 	private List<GameState> gameStates;
 	public GameState currentState;
-	public BarrelRunClient client;
+	public ClientConnect client;
 	private ControlManager cm;
 	
 	public GameStateManager(ControlManager cm) {
@@ -41,9 +41,9 @@ public class GameStateManager {
 		currentState = gameStates.get(type.ordinal());
 		try {
 			currentState.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		}catch (IOException e) {
+				e.printStackTrace();
+		}	
 	}
 	
 	public static int getWidth(){
@@ -55,6 +55,6 @@ public class GameStateManager {
 	}
 	
 	public void createClient(){
-		client = new BarrelRunClient();
+		client = new ClientConnect();
 	}	
 }
