@@ -1,18 +1,20 @@
 package model.gamestates;
 
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import model.Constants;
+import control.ControlManager;
 import control.GameStateManager;
 
-public abstract class GameState implements Constants{
+public abstract class GameState{
 
-	public GameStateManager gsm;
-
-	public GameState(GameStateManager gsm) {		
-		this.gsm = gsm;
+	public ControlManager cm;
+	public GameState(ControlManager cm) {		
+		this.cm = cm;
 	}
-	
+	public abstract void init();
+	public abstract void draw(Graphics2D g2);
+	public abstract void update();
 	public abstract void keyPressed(KeyEvent e);
 	public abstract void keyReleased(KeyEvent e);
 

@@ -3,12 +3,12 @@ package model.gamestates;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import control.GameStateManager;
+import control.ControlManager;
 
 public class EndState extends GameState {
 
-	public EndState(GameStateManager gsm) {
-		super(gsm);
+	public EndState(ControlManager cm) {
+		super(cm);
 		// TODO Auto-generated constructor stub
 	}
 

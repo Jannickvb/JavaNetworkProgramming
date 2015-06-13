@@ -19,14 +19,15 @@ import control.GameStateManager;
 public class GamePanel extends JPanel{
 
 	private GameStateManager gsm;
+	private ControlManager cm;
 	private Timer update,paint;
 	
 	public GamePanel(ControlManager cm) {
 		
 		setFocusable(true);
 		requestFocus(true);
-		
-		this.gsm = cm.getGameStateManager();
+		this.cm = cm;
+		this.gsm = this.cm.getGameStateManager();
 		paint = new Timer(1000/60,new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				

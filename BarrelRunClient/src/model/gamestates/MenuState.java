@@ -3,15 +3,18 @@ package model.gamestates;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+import control.ControlManager;
 import control.GameStateManager;
 import control.GameStateManager.StateType;
 
 public class MenuState extends GameState {
 
 	private String startString;
-	public MenuState(GameStateManager gsm) {
-		super(gsm);
-		// TODO Auto-generated constructor stub
+	private GameStateManager gsm;
+	
+	public MenuState(ControlManager cm) {
+		super(cm);
+		gsm = cm.getGameStateManager();
 	}
 
 	@Override
@@ -30,6 +33,7 @@ public class MenuState extends GameState {
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_ENTER:
+			System.out.println(StateType.wait);
 			gsm.setState(StateType.wait);
 			break;
 		}

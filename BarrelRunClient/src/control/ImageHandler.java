@@ -20,14 +20,16 @@ public class ImageHandler {
 	
 	static{
 		try {
-			addImage("player","circle.png");
+			addImage("player","player1.png");
+			addImage("player","player2.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public enum ImageType{
-		playerCircle,
+		player1,
+		player2,
 		
 	}
 	

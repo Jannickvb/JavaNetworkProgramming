@@ -13,7 +13,7 @@ import view.GameFrame;
 
 public class GameStateManager {
 
-	private static GameFrame frame;
+	private GameFrame frame;
 	private List<GameState> gameStates;
 	public GameState currentState;
 	public ClientConnect client;
@@ -23,11 +23,15 @@ public class GameStateManager {
 		this.cm = cm;
 		frame = cm.getFrame();
 		gameStates = new ArrayList<GameState>();
-		gameStates.add(new MenuState(this));
-		gameStates.add(new LoadingState(this));
-		gameStates.add(new PlayState(this));
-		gameStates.add(new EndState(this));
+		addGameStates();
 		setState(StateType.menu);
+	}
+	
+	public void addGameStates(){
+		gameStates.add(new MenuState(cm));
+		gameStates.add(new LoadingState(cm));
+		gameStates.add(new PlayState(cm));
+		gameStates.add(new EndState(cm));
 	}
 	
 	public enum StateType{
@@ -39,11 +43,11 @@ public class GameStateManager {
 		currentState.init();			
 	}
 	
-	public static int getWidth(){
+	public int getWidth(){
 		return frame.getContentPane().getWidth();
 	}
 	
-	public static int getHeight(){
+	public int getHeight(){
 		return frame.getContentPane().getHeight();
 	}
 	
