@@ -25,6 +25,9 @@ public class ControlManager{
 	public ControlManager(GameFrame frame) {
 		this.frame = frame;
 		this.gsm = new GameStateManager(this);
+		if(gsm == null){
+			System.out.println("ControlManager aids");
+		}
 	}
 	
 	public GameStateManager getGameStateManager(){
