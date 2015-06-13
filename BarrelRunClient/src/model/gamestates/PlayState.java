@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import control.GameStateManager;
-import model.Player;
+import model.entity.Player;
 
 public class PlayState extends GameState {
 
@@ -38,16 +38,20 @@ public class PlayState extends GameState {
 	}
 
 	@Override
-	public void update() throws IOException {		
-		//schrijf je eigen positie weg
-		
-//		System.out.println("ID: "+id+"\tPlayer1: "+player1.getShip());
-		gsm.client.toServer.writeDouble(player1.getX());
-		
-		//haal de positie van de andere op
-		
-//		System.out.println("ID: "+id+"\tPlayer2 positie: "+gsm.client.fromServer.readDouble());
-		player2.setX(gsm.client.fromServer.readDouble());
+	public void update(){		
+		try{
+			//schrijf je eigen positie weg
+			
+	//		System.out.println("ID: "+id+"\tPlayer1: "+player1.getShip());
+			gsm.client.toServer.writeDouble(player1.getX());
+			
+			//haal de positie van de andere op
+			
+	//		System.out.println("ID: "+id+"\tPlayer2 positie: "+gsm.client.fromServer.readDouble());
+			player2.setX(gsm.client.fromServer.readDouble());
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		
 		//update je player
 		if(right && !left){
@@ -84,9 +88,13 @@ public class PlayState extends GameState {
 	}
 
 	@Override
-	public void init()throws IOException {
+	public void init(){
+		try{
 //		System.out.println(gsm.client.fromServer.readInt());
-		id = gsm.client.fromServer.readInt();
+			id = gsm.client.fromServer.readInt();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		if(id == 0){
 			player1 = new Player(Player.player1);
 			player2 = new Player(Player.player2);
@@ -94,5 +102,6 @@ public class PlayState extends GameState {
 			player1 = new Player(Player.player2);
 			player2 = new Player(Player.player1);
 		}
+		
 	}	
 }

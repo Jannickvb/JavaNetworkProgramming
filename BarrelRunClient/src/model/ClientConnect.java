@@ -16,8 +16,7 @@ public class ClientConnect {
 			socket = new Socket("LocalHost",8000);
 			fromServer = new DataInputStream(socket.getInputStream());
 			toServer = new DataOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 	}

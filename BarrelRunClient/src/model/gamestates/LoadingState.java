@@ -20,9 +20,13 @@ public class LoadingState extends GameState {
 	}
 
 	@Override
-	public void update()throws IOException{
-		if(gsm.client.fromServer.readUTF().equals("go")){
-			gsm.setState(StateType.play);
+	public void update(){
+		try {
+			if(gsm.client.fromServer.readUTF().equals("go")){
+				gsm.setState(StateType.play);
+			}
+		} catch (IOException e) {			
+			e.printStackTrace();
 		}
 	}
 

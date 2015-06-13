@@ -36,12 +36,8 @@ public class GamePanel extends JPanel{
 		update = new Timer(1000/30, new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					gsm.currentState.update();
-				} catch (IOException e) {					
-					e.printStackTrace();
-				}				
+			public void actionPerformed(ActionEvent arg0) {				
+				gsm.currentState.update();								
 			}
 		});
 		this.paint.start();

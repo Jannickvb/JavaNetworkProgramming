@@ -27,7 +27,8 @@ public class ImageHandler {
 	}
 	
 	public enum ImageType{
-
+		playerCircle,
+		
 	}
 	
 	public static void addImage(String folderName, String fileName) throws IOException{

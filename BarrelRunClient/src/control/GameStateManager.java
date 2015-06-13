@@ -1,10 +1,7 @@
 package control;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JFrame;
 
 import model.ClientConnect;
 import model.gamestates.EndState;
@@ -38,12 +35,8 @@ public class GameStateManager {
 	}
 	
 	public void setState(StateType type){
-		currentState = gameStates.get(type.ordinal());
-		try {
-			currentState.init();
-		}catch (IOException e) {
-				e.printStackTrace();
-		}	
+		currentState = gameStates.get(type.ordinal());		
+		currentState.init();			
 	}
 	
 	public static int getWidth(){

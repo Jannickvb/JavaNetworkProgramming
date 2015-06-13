@@ -1,12 +1,11 @@
 package model.gamestates;
 
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
+import model.Constants;
 import control.GameStateManager;
 
-public abstract class GameState {
+public abstract class GameState implements Constants{
 
 	public GameStateManager gsm;
 
@@ -14,9 +13,6 @@ public abstract class GameState {
 		this.gsm = gsm;
 	}
 	
-	public abstract void init() throws IOException;
-	public abstract void draw(Graphics2D g2);
-	public abstract void update()throws IOException ;
 	public abstract void keyPressed(KeyEvent e);
 	public abstract void keyReleased(KeyEvent e);
 
