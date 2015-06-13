@@ -14,18 +14,21 @@ public class Player extends Entity{
 	public Player(BufferedImage image, Point2D position) {
 		super(image, position);
 		animation = new Animation(image,52,image.getHeight());
-		border = new Rectangle2D.Double(0,0,52,image.getHeight());
 	}
 
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawImage(currentImage,tx,null);
+		g2.drawImage(currentImage,null,(int)position.getX(),(int) position.getY());
 	}
 	
 	@Override
 	public void update(){
-		super.update();
 	    currentImage = animation.giveNext();
 	}
 	

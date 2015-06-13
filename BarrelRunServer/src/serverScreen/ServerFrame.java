@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class ServerScreen extends JPanel implements ActionListener {
+public class ServerFrame extends JPanel implements ActionListener {
 
 	/**
 	 * 
@@ -18,12 +18,12 @@ public class ServerScreen extends JPanel implements ActionListener {
 	public JTextArea jta;
 	private Timer paint;
 	
-	public ServerScreen(){
+	public ServerFrame(){
 		super(null);
 		JFrame frame = new JFrame("Server");
 		frame.setDefaultCloseOperation(3);
 		frame.setContentPane(this);
-		frame.setSize(800, 800);
+		frame.setSize(400,300);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		jta = new JTextArea();

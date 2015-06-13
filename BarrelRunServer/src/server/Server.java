@@ -9,24 +9,24 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import serverScreen.ServerScreen;
+import serverScreen.ServerFrame;
 
 public class Server {	
 	
 	private List<Player> playerList;
 	private List<Lobby> lobbys;	
 	
-	public Server(ServerScreen ss){		
+	public Server(ServerFrame serverFrame){		
 		ServerSocket server = null;
 		playerList = new ArrayList<Player>();
 		lobbys = new ArrayList<Lobby>();		
 		try {
 			 server = new ServerSocket(8000);
-			 ss.jta.append("Server started at: "+new Date());			 
-			 ss.jta.append("\nAdress: "+InetAddress.getLocalHost());
+			 serverFrame.jta.append("Server started at: "+new Date());			 
+			 serverFrame.jta.append("\nAdress: "+InetAddress.getLocalHost());
 			 while(true){
 				 Socket socket = server.accept();
-				 ss.jta.append("\nClient is connected"+socket.getLocalAddress());
+				 serverFrame.jta.append("\nClient is connected"+socket.getLocalAddress());
 				 playerList.add(new Player(socket.getInputStream(),socket.getOutputStream()));				 
 				
 				 if(playerList.size() == 2){					 
@@ -43,7 +43,7 @@ public class Server {
 						lobbyIterator.remove();
 					}
 				}
-				ss.jta.append("\nLobby list: "+lobbys.size());
+				serverFrame.jta.append("\nLobby list: "+lobbys.size());
 			 }
 		} catch (IOException e) {
 			e.printStackTrace();

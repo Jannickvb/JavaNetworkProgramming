@@ -25,7 +25,6 @@ public class Animation{
 	
 	public BufferedImage giveNext()
 	{
-		System.out.println("spriteIndex: " + spriteIndex);
 		if(subimage.length>spriteIndex)
 		{
 			spriteIndex++;

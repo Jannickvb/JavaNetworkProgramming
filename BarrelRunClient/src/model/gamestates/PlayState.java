@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.entity.Player;
-import model.entity.Rock;
+import model.entity.Barrel;
 import control.ControlManager;
 import control.ImageHandler;
 import control.ImageHandler.ImageType;
@@ -22,14 +22,11 @@ public class PlayState extends GameState {
 	private Player player1,player2;
 	private int id;	
 	private boolean left,right;
-	private List<Rock> rocks;
-	private Line2D bottomLine;
-	private Stroke s;
+	private List<Barrel> rocks;
 	
 	public PlayState(ControlManager cm) {
 		super(cm);	
-		rocks = new ArrayList<Rock>();		
-		s = new BasicStroke(10);
+		rocks = new ArrayList<Barrel>();		
 	}
 
 	@Override
@@ -41,37 +38,14 @@ public class PlayState extends GameState {
 			player1.draw(g2);
 			
 		}
-		for(Rock r : rocks){
+		for(Barrel r : rocks){
 			r.draw(g2);
 		}
-		g2.setStroke(s);
-		g2.draw(bottomLine);
 	}
 
 	@Override
 	public void update(){
-		bottomLine = new Line2D.Double(0,cm.getGameStateManager().getHeight(),
-				cm.getGameStateManager().getWidth(),cm.getGameStateManager().getHeight());
-		try{
-			//schrijf je eigen positie weg
-			
-			cm.getGameStateManager().client.toServer.writeDouble(player1.getX());
-			
-			//haal de positie van de andere op
-			
-	//		System.out.println("ID: "+id+"\tPlayer2 positie: "+gsm.client.fromServer.readDouble());			
-
-			player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
-			
-			String[]stonePosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
-			if(rocks.size() < 20){
-				rocks.add(	new Rock(ImageHandler.getImage(ImageType.barrel), 
-							new Point2D.Double(Double.parseDouble(stonePosition[0]), Double.parseDouble(stonePosition[1]))));
-			}
-			
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+		refreshData();
 		
 		//update je player
 		if(right && !left){
@@ -80,20 +54,45 @@ public class PlayState extends GameState {
 		if(!right && left){
 			player1.setX(player1.getX()-5);
 		}
-		Iterator<Rock> rockIterator = rocks.iterator();
-		while(rockIterator.hasNext()){
-			Rock rock = rockIterator.next();
-			if(rock.getBorder().getBounds2D().intersectsLine(bottomLine)){
-				rockIterator.remove();
-			}else{
-				rock.update();
-			}
-		}
+		
+		checkBarrelBounds();
+		
 		player1.update();
 		player2.update();
 		
 	}
 
+	public void refreshData(){
+		try{
+			//schrijf je eigen positie weg
+			cm.getGameStateManager().client.toServer.writeDouble(player1.getX());
+			
+			//haal de positie van de andere op
+			player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
+			
+			String[]barrelPosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
+			if(rocks.size() < 20){
+				rocks.add(	new Barrel(ImageHandler.getImage(ImageType.barrel), 
+							new Point2D.Double(Double.parseDouble(barrelPosition[0]), Double.parseDouble(barrelPosition[1]))));
+			}
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkBarrelBounds(){
+		Iterator<Barrel> barrelIt = rocks.iterator();
+		while(barrelIt.hasNext()){
+			Barrel Barrel = barrelIt.next();
+			if(Barrel.getPosition().getY()>cm.getGameStateManager().getHeight()){
+				barrelIt.remove();
+			}else{
+				Barrel.update();
+			}
+		}
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {		
 		switch(e.getKeyCode()){

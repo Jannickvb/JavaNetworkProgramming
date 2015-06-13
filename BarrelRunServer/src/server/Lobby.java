@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lobby implements Runnable {
 	
-	private Player[]players;
+	private Player[] players;
 	private boolean isRunning = true;
 	
 	public Lobby(List<Player> playerList) {				
@@ -22,25 +22,25 @@ public class Lobby implements Runnable {
 			for(int i = 0; i < players.length; i++){				
 					players[i].toClient.writeUTF("go");
 					players[i].toClient.writeInt(i);
-			}			
-			double player1X,player2X,xStone,yStone,xBounds = 1920,yBounds = 128;
-			String stonePosition = "";
+			}
+			double player1X,player2X,barrelX,barrelY,boundWidth = 800,boundHeight = 128;
+			String barrelPosition = "";
 			while(isRunning){
 				//haal de coordinaten op vanuit de clients
 				player1X = players[0].fromClient.readDouble();
 				player2X = players[1].fromClient.readDouble();
 				
-				xStone = (Math.random()*xBounds)+1;
-				yStone = (Math.random()*yBounds)+1;
+				barrelX = (Math.random()*boundWidth)+1;
+				barrelY = (Math.random()*boundHeight)+1;
 
 //				System.out.println("Player1: "+player1X+"\tPlayer2: "+player2X);
 				//schrijf de coordinaten naar de ander speler toe
 				players[0].toClient.writeDouble(player2X);
 				players[1].toClient.writeDouble(player1X);
-				//maak de cooridinaten voor een nieuwe stone
-				stonePosition = xStone+":"+yStone;
-				players[0].toClient.writeUTF(stonePosition);
-				players[1].toClient.writeUTF(stonePosition);
+				//maak de cooridinaten voor een nieuwe barrel
+				barrelPosition = barrelX+":"+barrelY;
+				players[0].toClient.writeUTF(barrelPosition);
+				players[1].toClient.writeUTF(barrelPosition);
 			}
 		}catch(IOException e){
 			e.printStackTrace();
