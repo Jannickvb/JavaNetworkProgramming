@@ -1,6 +1,6 @@
-package barrelRunClientModel;
+package model;
 
-import barrelRunClientControl.GameStateManager;
+import control.GameStateManager;
 
 public class BarrelRunClientModel {
 

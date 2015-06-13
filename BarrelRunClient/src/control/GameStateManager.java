@@ -1,4 +1,4 @@
-package barrelRunClientControl;
+package control;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,22 +6,25 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import barrelRunClientModel.BarrelRunClient;
-import barrelRunClientModel.gameState.EndState;
-import barrelRunClientModel.gameState.GameState;
-import barrelRunClientModel.gameState.LoadingState;
-import barrelRunClientModel.gameState.MenuState;
-import barrelRunClientModel.gameState.PlayState;
+import model.BarrelRunClient;
+import model.gamestates.EndState;
+import model.gamestates.GameState;
+import model.gamestates.LoadingState;
+import model.gamestates.MenuState;
+import model.gamestates.PlayState;
+import view.GameFrame;
 
 public class GameStateManager {
 
-	private static JFrame frame;
+	private static GameFrame frame;
 	private List<GameState> gameStates;
 	public GameState currentState;
 	public BarrelRunClient client;
+	private ControlManager cm;
 	
-	public GameStateManager(JFrame frame) {
-		GameStateManager.frame = frame;
+	public GameStateManager(ControlManager cm) {
+		this.cm = cm;
+		frame = cm.getFrame();
 		gameStates = new ArrayList<GameState>();
 		gameStates.add(new MenuState(this));
 		gameStates.add(new LoadingState(this));
@@ -39,7 +42,6 @@ public class GameStateManager {
 		try {
 			currentState.init();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -52,7 +54,7 @@ public class GameStateManager {
 		return frame.getContentPane().getHeight();
 	}
 	
-	public void makeClient(){
+	public void createClient(){
 		client = new BarrelRunClient();
 	}	
 }

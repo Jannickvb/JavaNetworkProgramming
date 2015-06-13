@@ -1,4 +1,8 @@
 /barrelRunClientControl/
-/barrelRunClientModel/
-/barrelRunClientStart/
 /barrelRunClientView/
+/barrelRunClientStart/
+/view/
+/barrelRunClientModel/
+/images/
+/model/
+/control/

@@ -1,23 +1,22 @@
-package barrelRunClientModel.gameState;
+package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import barrelRunClientControl.GameStateManager;
-import barrelRunClientControl.GameStateManager.StateType;
+import control.GameStateManager;
+import control.GameStateManager.StateType;
 
 public class LoadingState extends GameState {
 
 	private String loadingString = "Waiting for other player";
 	public LoadingState(GameStateManager gsm) {
 		super(gsm);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawString(loadingString, gsm.getWidth()/2-g2.getFontMetrics().stringWidth(loadingString)/2, gsm.getHeight()/2);
+		g2.drawString(loadingString, GameStateManager.getWidth()/2-g2.getFontMetrics().stringWidth(loadingString)/2, GameStateManager.getHeight()/2);
 	}
 
 	@Override
@@ -25,24 +24,17 @@ public class LoadingState extends GameState {
 		if(gsm.client.fromServer.readUTF().equals("go")){
 			gsm.setState(StateType.play);
 		}
-
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void keyPressed(KeyEvent e) {}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void keyReleased(KeyEvent e) {}
 
 	@Override
 	public void init() {
-		gsm.makeClient();		
+		gsm.createClient();
 	}
 
 }

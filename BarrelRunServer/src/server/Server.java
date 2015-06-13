@@ -42,11 +42,10 @@ public class Server {
 					if(!lobbyIterator.next().isRunning()){
 						lobbyIterator.remove();
 					}
-				}				 
-				 ss.jta.append("\nLobby list: "+lobbys.size());
+				}
+				ss.jta.append("\nLobby list: "+lobbys.size());
 			 }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,10 +1,10 @@
-package barrelRunClientModel.gameState;
+package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import barrelRunClientControl.GameStateManager;
-import barrelRunClientControl.GameStateManager.StateType;
+import control.GameStateManager;
+import control.GameStateManager.StateType;
 
 public class MenuState extends GameState {
 

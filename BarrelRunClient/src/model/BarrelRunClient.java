@@ -1,4 +1,4 @@
-package barrelRunClientModel;
+package model;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

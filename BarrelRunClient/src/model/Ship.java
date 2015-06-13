@@ -1,8 +1,8 @@
-package barrelRunClientModel;
+package model;
 
 import java.awt.geom.Rectangle2D;
 
-import barrelRunClientControl.GameStateManager;
+import control.GameStateManager;
 
 public class Ship {
 

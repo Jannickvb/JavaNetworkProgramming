@@ -1,10 +1,10 @@
-package barrelRunClientModel.gameState;
+package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import barrelRunClientControl.GameStateManager;
+import control.GameStateManager;
 
 public abstract class GameState {
 

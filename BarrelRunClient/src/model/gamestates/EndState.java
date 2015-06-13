@@ -1,9 +1,9 @@
-package barrelRunClientModel.gameState;
+package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import barrelRunClientControl.GameStateManager;
+import control.GameStateManager;
 
 public class EndState extends GameState {
 
