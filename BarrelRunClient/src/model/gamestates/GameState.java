@@ -8,7 +8,8 @@ import control.GameStateManager;
 
 public abstract class GameState{
 
-	public ControlManager cm;
+	protected ControlManager cm;
+	
 	public GameState(ControlManager cm) {		
 		this.cm = cm;
 	}
@@ -18,4 +19,7 @@ public abstract class GameState{
 	public abstract void keyPressed(KeyEvent e);
 	public abstract void keyReleased(KeyEvent e);
 
+	public String toString(){
+		return this.getClass().getSimpleName();
+	}
 }
