@@ -22,6 +22,7 @@ public class ImageHandler {
 		try {
 			addImage("player","player1.png");
 			addImage("player","player2.png");
+			addImage("objects", "barrel.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -30,7 +31,7 @@ public class ImageHandler {
 	public enum ImageType{
 		player1,
 		player2,
-		
+		barrel,
 	}
 	
 	public static void addImage(String folderName, String fileName) throws IOException{

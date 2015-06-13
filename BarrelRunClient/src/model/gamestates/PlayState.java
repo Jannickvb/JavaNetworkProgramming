@@ -1,12 +1,18 @@
 package model.gamestates;
 
-import java.awt.Color;
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import model.entity.Player;
+import model.entity.Rock;
 import control.ControlManager;
 import control.ImageHandler;
 import control.ImageHandler.ImageType;
@@ -16,31 +22,36 @@ public class PlayState extends GameState {
 	private Player player1,player2;
 	private int id;	
 	private boolean left,right;
+	private List<Rock> rocks;
+	private Line2D bottomLine;
+	private Stroke s;
 	
 	public PlayState(ControlManager cm) {
-		super(cm);		
+		super(cm);	
+		rocks = new ArrayList<Rock>();		
+		s = new BasicStroke(10);
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {	
-		g2.setColor(Color.GREEN);
-		g2.drawLine(cm.getGameStateManager().getWidth()/2, 0, cm.getGameStateManager().getWidth()/2, cm.getGameStateManager().getHeight());
-		if(player1 != null){
-//			if(id == 0){
-//				player2.draw(g2);
-//				player1.draw(g2);
-//			}else if(id == 1){
-//				player1.draw(g2);
-//				player2.draw(g2);
-//			}
+//		g2.setColor(Color.GREEN);
+//		g2.drawLine(cm.getGameStateManager().getWidth()/2, 0, cm.getGameStateManager().getWidth()/2, cm.getGameStateManager().getHeight());
+		if(player1 != null){		
 			player2.draw(g2);
 			player1.draw(g2);
 			
-		}		
+		}
+		for(Rock r : rocks){
+			r.draw(g2);
+		}
+		g2.setStroke(s);
+		g2.draw(bottomLine);
 	}
 
 	@Override
-	public void update(){		
+	public void update(){
+		bottomLine = new Line2D.Double(0,cm.getGameStateManager().getHeight(),
+				cm.getGameStateManager().getWidth(),cm.getGameStateManager().getHeight());
 		try{
 			//schrijf je eigen positie weg
 			
@@ -48,7 +59,16 @@ public class PlayState extends GameState {
 			
 			//haal de positie van de andere op
 			
+	//		System.out.println("ID: "+id+"\tPlayer2 positie: "+gsm.client.fromServer.readDouble());			
+
 			player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
+			
+			String[]stonePosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
+			if(rocks.size() < 20){
+				rocks.add(	new Rock(ImageHandler.getImage(ImageType.barrel), 
+							new Point2D.Double(Double.parseDouble(stonePosition[0]), Double.parseDouble(stonePosition[1]))));
+			}
+			
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -59,6 +79,15 @@ public class PlayState extends GameState {
 		}
 		if(!right && left){
 			player1.setX(player1.getX()-5);
+		}
+		Iterator<Rock> rockIterator = rocks.iterator();
+		while(rockIterator.hasNext()){
+			Rock rock = rockIterator.next();
+			if(rock.getBorder().getBounds2D().intersectsLine(bottomLine)){
+				rockIterator.remove();
+			}else{
+				rock.update();
+			}
 		}
 		player1.update();
 		player2.update();

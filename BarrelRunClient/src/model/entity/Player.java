@@ -6,7 +6,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import model.Animation;
-import control.GameStateManager;
 
 public class Player extends Entity{
 	
@@ -15,12 +14,9 @@ public class Player extends Entity{
 	public Player(BufferedImage image, Point2D position) {
 		super(image, position);
 		animation = new Animation(image,52,image.getHeight());
+		border = new Rectangle2D.Double(0,0,52,image.getHeight());
 	}
 
-	@Override
-	public void init() {
-		
-	}
 
 	@Override
 	public void draw(Graphics2D g2) {
