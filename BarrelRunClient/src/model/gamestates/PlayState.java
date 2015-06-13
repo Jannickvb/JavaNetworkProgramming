@@ -44,12 +44,10 @@ public class PlayState extends GameState {
 		try{
 			//schrijf je eigen positie weg
 			
-	//		System.out.println("ID: "+id+"\tPlayer1: "+player1.getShip());
 			cm.getGameStateManager().client.toServer.writeDouble(player1.getX());
 			
 			//haal de positie van de andere op
 			
-	//		System.out.println("ID: "+id+"\tPlayer2 positie: "+gsm.client.fromServer.readDouble());
 			player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
 		}catch(IOException e){
 			e.printStackTrace();

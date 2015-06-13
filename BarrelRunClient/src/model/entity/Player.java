@@ -11,11 +11,10 @@ import control.GameStateManager;
 public class Player extends Entity{
 	
 	private Animation animation;
-	private int keyFrame;
+	private BufferedImage currentImage;
 	public Player(BufferedImage image, Point2D position) {
 		super(image, position);
 		animation = new Animation(image,52,image.getHeight());
-		keyFrame = 0;
 	}
 
 	@Override
@@ -25,19 +24,13 @@ public class Player extends Entity{
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawImage(image,tx,null);
+		g2.drawImage(currentImage,tx,null);
 	}
 	
 	@Override
 	public void update(){
 		super.update();
-		keyFrame++;
-		if(keyFrame%4 == 0){
-			image = animation.giveNext();
-		}
-		if(keyFrame >= 30){
-			keyFrame = 0;
-		}
+	    currentImage = animation.giveNext();
 	}
 	
 	public double getX(){

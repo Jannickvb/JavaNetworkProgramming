@@ -25,14 +25,16 @@ public class Animation{
 	
 	public BufferedImage giveNext()
 	{
+		System.out.println("spriteIndex: " + spriteIndex);
 		if(subimage.length>spriteIndex)
 		{
 			spriteIndex++;
 			return subimage[spriteIndex-1];
 		}
 		else
-		{			
+		{
 			spriteIndex = 0;
+			hasPlayedOnce = true;
 		}
 		return subimage[spriteIndex];
 	}

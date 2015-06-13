@@ -28,7 +28,7 @@ public class Lobby implements Runnable {
 				//haal de coordinaten op vanuit de clients
 				player1X = players[0].fromClient.readDouble();
 				player2X = players[1].fromClient.readDouble();
-				System.out.println("Player1: "+player1X+"\tPlayer2: "+player2X);
+//				System.out.println("Player1: "+player1X+"\tPlayer2: "+player2X);
 				//schrijf de coordinaten naar de ander speler toe
 				players[0].toClient.writeDouble(player2X);
 				players[1].toClient.writeDouble(player1X);
