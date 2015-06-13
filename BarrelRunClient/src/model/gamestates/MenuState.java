@@ -9,17 +9,15 @@ import control.GameStateManager.StateType;
 
 public class MenuState extends GameState {
 
-	private String startString;
-	private GameStateManager gsm;
+	private String startString;	
 	
 	public MenuState(ControlManager cm) {
-		super(cm);
-		gsm = cm.getGameStateManager();
+		super(cm);		
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawString(startString, gsm.getWidth()/2-g2.getFontMetrics().stringWidth(startString)/2, gsm.getHeight()/2);
+		g2.drawString(startString, cm.getGameStateManager().getWidth()/2-g2.getFontMetrics().stringWidth(startString)/2, cm.getGameStateManager().getHeight()/2);
 
 	}
 
@@ -34,7 +32,7 @@ public class MenuState extends GameState {
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_ENTER:
 			System.out.println(StateType.wait);
-			gsm.setState(StateType.wait);
+			cm.getGameStateManager().setState(StateType.wait);
 			break;
 		}
 
