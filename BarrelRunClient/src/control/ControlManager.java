@@ -1,18 +1,8 @@
 package control;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
 
-import javax.swing.Timer;
-
-import model.ClientConnect;
-import model.ClientConnect;
 import view.GameFrame;
-import view.GamePanel;
 
 public class ControlManager{
 
@@ -24,10 +14,7 @@ public class ControlManager{
 	
 	public ControlManager(GameFrame frame) {
 		this.frame = frame;
-		this.gsm = new GameStateManager(this);
-		if(gsm == null){
-			System.out.println("ControlManager aids");
-		}
+		this.gsm = new GameStateManager(this);		
 	}
 	
 	public GameStateManager getGameStateManager(){

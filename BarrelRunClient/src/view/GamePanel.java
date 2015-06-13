@@ -11,12 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import control.ControlManager;
-import control.GameStateManager;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel{
-
-	private GameStateManager gsm;
+public class GamePanel extends JPanel{	
 	private ControlManager cm;
 	
 	private Timer update,paint;
@@ -25,12 +22,8 @@ public class GamePanel extends JPanel{
 		setFocusable(true);
 		requestFocus(true);
 		
-		if(cm == null){
-			System.out.println("GamePanel aids");
-		}
-		
 		this.cm = cm;
-		this.gsm = this.cm.getGameStateManager();
+		
 		
 		paint = new Timer(1000/60,new ActionListener() {			
 			@Override
@@ -42,7 +35,7 @@ public class GamePanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				
-				gsm.currentState.update();								
+				cm.getGameStateManager().currentState.update();								
 			}
 		});
 		this.paint.start();
@@ -54,12 +47,12 @@ public class GamePanel extends JPanel{
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 					System.exit(0);
 				}
-				gsm.currentState.keyPressed(e);
+				cm.getGameStateManager().currentState.keyPressed(e);
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				gsm.currentState.keyReleased(e);
+				cm.getGameStateManager().currentState.keyReleased(e);
 			}
 		});
 	}
@@ -68,7 +61,7 @@ public class GamePanel extends JPanel{
 	protected void paintComponent(Graphics g) {		
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		gsm.currentState.draw(g2);
+		cm.getGameStateManager().currentState.draw(g2);
 	}
 
 }

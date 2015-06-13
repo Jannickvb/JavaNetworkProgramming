@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import control.ControlManager;
-import control.GameStateManager;
 import control.GameStateManager.StateType;
 
 public class MenuState extends GameState {
