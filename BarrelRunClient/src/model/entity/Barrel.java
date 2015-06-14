@@ -31,7 +31,7 @@ public class Barrel extends Entity {
 		g2.drawImage(currentImage, null,
 					(int) position.getX(),
 					(int) position.getY());
-		g2.draw(bounds);
+//		g2.draw(bounds);
 	};
 
 	@Override

@@ -42,6 +42,7 @@ public class Server {
 						while(lobbyIterator.hasNext()){					
 							if(!lobbyIterator.next().isRunning()){
 								lobbyIterator.remove();
+								serverFrame.jta.append("\nLobby deleted");
 							}
 						}
 					}else{
@@ -65,8 +66,8 @@ public class Server {
 					 Thread thread = new Thread(lobby);
 					 thread.start();					 
 					 lobbies.add(lobby);	
-					 String[] huidigeTijd = new Date().toString().split("CEST");
-					 serverFrame.jta.append("\nEen nieuwe Lobby is toegevoegd op "+huidigeTijd[0]+huidigeTijd[1]);
+					 String[] localTime = new Date().toString().split("CEST");
+					 serverFrame.jta.append("\nAdded new Lobby at: "+localTime[0]+localTime[1]);
 					 playerList.clear();				
 				 }					 
 			 }

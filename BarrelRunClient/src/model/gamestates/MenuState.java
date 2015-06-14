@@ -29,6 +29,9 @@ public class MenuState extends GameState {
 	public void draw(Graphics2D g2) {
 		g2.drawImage(bg,0,0,null);
 		drawBarrels(g2,0);
+		g2.drawString("BARREL RUN!",
+				cm.getGameStateManager().getWidth() / 2 - g2.getFontMetrics().stringWidth("BARREL RUN!") / 2,
+				100);
 		g2.drawString(startString,
 				cm.getGameStateManager().getWidth() / 2 - g2.getFontMetrics().stringWidth(startString) / 2,
 				cm.getGameStateManager().getHeight() / 2);

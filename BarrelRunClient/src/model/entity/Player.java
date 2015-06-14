@@ -36,8 +36,8 @@ public class Player extends Entity {
 					 null,
 					 (int) position.getX(),
 					 (int) position.getY());
-		g2.setColor(Color.BLACK);
-		g2.draw(bounds);
+//		g2.setColor(Color.BLACK);
+//		g2.draw(bounds);
 	}
 
 	@Override
