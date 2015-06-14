@@ -29,7 +29,7 @@ public class Lobby implements Runnable {
 			while(isRunning){
 				boolean statusp1 = players[0].fromClient.readBoolean();
 				boolean statusp2 = players[1].fromClient.readBoolean();
-				int id;
+				int id;				
 				if(statusp1 || statusp2)
 				{
 					players[0].toClient.writeBoolean(true);

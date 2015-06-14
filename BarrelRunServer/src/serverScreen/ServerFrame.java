@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,6 +22,7 @@ public class ServerFrame extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -4645410015441069848L;
 
 	public JTextArea jta;
+	public JButton button;
 	private Timer paint;
 	
 	public static void main(String[] args){
@@ -37,19 +39,23 @@ public class ServerFrame extends JPanel implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		jta = new JTextArea();
+		button = new JButton("Show active lobbys");		
 		JScrollPane sp = new JScrollPane(jta);
-		sp.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight());
+		sp.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight()-25);
+		button.setBounds(0, sp.getHeight(), 200, 25);
 		add(sp);
+		add(button);
 		paint = new Timer(1000/5, this);
 		paint.start();
 		
 		frame.addComponentListener(new ComponentAdapter() {
 		    public void componentResized(ComponentEvent e) {
-		    	sp.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight());
+		    	sp.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight()-25);
+		    	button.setBounds(0, sp.getHeight(), 200, 25);
 		    }
 		});
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		repaint();		

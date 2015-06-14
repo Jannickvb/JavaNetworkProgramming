@@ -1,5 +1,7 @@
 package server;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -16,10 +18,16 @@ public class Server {
 	private List<Player> playerList;
 	private List<Lobby> lobbys;	
 	
-	public Server(ServerFrame serverFrame){		
+	public Server(ServerFrame serverFrame){	
 		ServerSocket server = null;
 		playerList = new ArrayList<Player>();
-		lobbys = new ArrayList<Lobby>();		
+		lobbys = new ArrayList<Lobby>();
+		serverFrame.button.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				serverFrame.jta.append("\nLobby size at: "+lobbys.size());				
+			}
+		});
 		try {
 			 server = new ServerSocket(8000);
 			 serverFrame.jta.append("Server started at: "+new Date());			 
@@ -33,20 +41,21 @@ public class Server {
 					 Lobby lobby = new Lobby(playerList);
 					 Thread thread = new Thread(lobby);
 					 thread.start();					 
-					 lobbys.add(lobby);					 
-					 playerList.clear();					 
-					
+					 lobbys.add(lobby);	
+					 String[] huidigeTijd = new Date().toString().split("CEST");
+					 serverFrame.jta.append("\nEen nieuwe server is toegevoegd op "+huidigeTijd[0]+huidigeTijd[1]);
+					 playerList.clear();				
 				 }				 
+				 
 				Iterator<Lobby> lobbyIterator = lobbys.iterator();
 				while(lobbyIterator.hasNext()){					
 					if(!lobbyIterator.next().isRunning()){
 						lobbyIterator.remove();
 					}
 				}
-				serverFrame.jta.append("\nLobby list: "+lobbys.size());
 			 }
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 }
