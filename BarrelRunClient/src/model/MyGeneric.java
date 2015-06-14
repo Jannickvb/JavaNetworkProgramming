@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyGeneric<T extends Number> extends ArrayList<T>{
+public class MyGeneric<T extends Number>{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private T t;
 	
-	List<? extends T> values;
-
-	public MyGeneric(List<? extends T> values) {
-		super();
-		this.values = values;
+	public void change(T t){
+		this.t = t;
 	}
-		
+	
+	public T get(){
+		return t;
+	}
 }
