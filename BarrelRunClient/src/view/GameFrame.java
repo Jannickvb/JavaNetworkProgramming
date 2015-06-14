@@ -45,7 +45,7 @@ public class GameFrame extends JFrame{
 		WindowMode wm = WindowMode.values()[windowMode];
 		switch(wm){
 		case window:
-			System.out.println("No Fullscreen");
+//			System.out.println("No Fullscreen");
 			this.setUndecorated(false);
 			break;
 		case fullscreenWindow:

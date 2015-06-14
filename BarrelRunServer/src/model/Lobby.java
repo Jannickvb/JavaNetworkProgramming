@@ -24,7 +24,7 @@ public class Lobby implements Runnable {
 					players[i].toClient.writeInt(i);
 			}
 			
-			double player1X,player2X,barrelX,barrelY,boundWidth = 800-103,boundHeight = 128;
+			double player1X,player2X,barrelX,barrelY,boundWidth = 1920,boundHeight = 1080;
 			String barrelPosition = "";
 			while(isRunning){
 				boolean statusp1 = players[0].fromClient.readBoolean();

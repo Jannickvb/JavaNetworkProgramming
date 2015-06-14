@@ -24,6 +24,7 @@ public class ImageHandler {
 			addImage("player","player2.png");
 			addImage("objects", "barrel.png");
 			addImage("objects", "barrelClient.png");
+			addImage("player", "playerIndication.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -34,6 +35,7 @@ public class ImageHandler {
 		player2,
 		barrel,
 		clientIcon,
+		playerI,
 		
 	}
 	
