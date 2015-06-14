@@ -36,7 +36,7 @@ public class Barrel extends Entity {
 
 	@Override
 	public void update() {
-		position.setLocation(position.getX(), position.getY() + 3);
+		position.setLocation(position.getX(), position.getY() + 7);
 		currentImage = animation.giveNext();
 		bounds = new Rectangle2D.Double(position.getX(), position.getY(),
 				currentImage.getWidth(), currentImage.getHeight());

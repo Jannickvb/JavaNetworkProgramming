@@ -18,7 +18,7 @@ public class GameFrame extends JFrame{
 			public void run() {
 				try {
 					GameFrame frame = new GameFrame();
-					frame.setFullScreenEnabled(GameFrame.WindowMode.window.ordinal());
+					frame.setFullScreenEnabled(GameFrame.WindowMode.fullscreenWindow.ordinal());
 					frame.setVisible(true);
 				}catch(Exception e){
 					e.printStackTrace();	
@@ -30,7 +30,6 @@ public class GameFrame extends JFrame{
 	boolean fullscreenEnabled = false;
 	int windowMode = 0;
 	GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-	public static int screenWidth;
 	
 	public GameFrame(){
 		super("BarrelRun");
@@ -45,7 +44,7 @@ public class GameFrame extends JFrame{
 		WindowMode wm = WindowMode.values()[windowMode];
 		switch(wm){
 		case window:
-			System.out.println("No Fullscreen");
+//			System.out.println("No Fullscreen");
 			this.setUndecorated(false);
 			break;
 		case fullscreenWindow:

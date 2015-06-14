@@ -49,7 +49,7 @@ public class ServerFrame extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 		jta = new JTextArea();
-		button = new JButton("Show active lobbys");		
+		button = new JButton("Show active lobbies");
 		JScrollPane sp = new JScrollPane(jta);
 		sp.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight()-25);
 		button.setBounds(0, sp.getHeight(), 200, 25);

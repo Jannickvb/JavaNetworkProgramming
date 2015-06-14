@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -8,13 +9,13 @@ import java.awt.image.BufferedImage;
 import model.Animation;
 
 public class Player extends Entity {
-
+	
 	private Animation animation;
 	private BufferedImage currentImage;
 	private Rectangle2D bounds;
 
 	public Player(BufferedImage image, Point2D position) {
-		super(image, position);
+		super(image, position);		
 		animation = new Animation(image, 52, image.getHeight());
 		currentImage = animation.giveNext();
 		bounds = new Rectangle2D.Double(position.getX(),
@@ -35,6 +36,7 @@ public class Player extends Entity {
 					 null,
 					 (int) position.getX(),
 					 (int) position.getY());
+		g2.setColor(Color.BLACK);
 		g2.draw(bounds);
 	}
 

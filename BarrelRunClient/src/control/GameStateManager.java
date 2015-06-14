@@ -62,6 +62,11 @@ public class GameStateManager {
 		client = new ClientConnect();
 	}
 	
+	public void reset(){
+		gameStates.clear();
+		addGameStates();
+	}
+	
 	public void closeClient(){
 		if(client != null){
 			client.close();

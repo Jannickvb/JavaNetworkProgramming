@@ -2,19 +2,25 @@ package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 
 import control.ControlManager;
 import control.GameStateManager.StateType;
+import control.ImageHandler;
+import control.ImageHandler.ImageType;
 
 public class LoadingState extends GameState {
 	
+	private BufferedImage bg;
+	
 	public LoadingState(ControlManager cm) {
 		super(cm);		
+		bg = ImageHandler.getScaledImage(ImageHandler.getImage(ImageType.wijzeIndiaan));
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
+		g2.drawImage(bg, 0, 0, null);
 		g2.drawString("Waiting for other player",
 					  cm.getGameStateManager().getWidth()/2-g2.getFontMetrics().stringWidth("Waiting for other player")/2, 
 					  cm.getGameStateManager().getHeight()/2);

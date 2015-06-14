@@ -23,16 +23,26 @@ public class ImageHandler {
 		try {
 			addImage("player", "player1.png");
 			addImage("player", "player2.png");
+			addImage("player", "playerPrev.png");
 			addImage("objects", "barrel.png");
 			addImage("objects", "barrelClient.png");
 			addImage("objects", "barrel_side.png");
+			addImage("backgrounds", "wijzeindiaan.png");
+			addImage("backgrounds", "mooizand.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public enum ImageType {
-		player1, player2, barrel, clientIcon,barrel_side
+	
+	public enum ImageType{
+		player1,
+		player2,
+		playerPrev,
+		barrel,
+		clientIcon,
+		barrelSide,
+		wijzeIndiaan,
+		mooizand,
 
 	}
 

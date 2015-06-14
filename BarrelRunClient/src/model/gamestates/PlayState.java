@@ -1,18 +1,17 @@
 package model.gamestates;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.entity.Player;
 import model.entity.Barrel;
+import model.entity.Player;
+import model.entity.PlayerIndication;
 import control.ControlManager;
 import control.GameStateManager.StateType;
 import control.ImageHandler;
@@ -20,27 +19,35 @@ import control.ImageHandler.ImageType;
 
 public class PlayState extends GameState {
 
+	private PlayerIndication playerIndication;
 	private Player player1,player2;
 	private int id;	
 	private boolean left,right;
 	public boolean win;
 	private List<Barrel> rocks;
+	private BufferedImage bg;
 	
 	public PlayState(ControlManager cm) {
-		super(cm);				
+		super(cm);
+		bg = ImageHandler.getScaledImage(ImageHandler.getImage(ImageHandler.ImageType.mooizand));
 	}
 	
 	@Override
 	public void init(){
+		left = false;
+		right = false;
+		int frameWidth = cm.getGameStateManager().getWidth();
+		int frameHeight = cm.getGameStateManager().getHeight();
 		rocks = new ArrayList<Barrel>();	
 		try{
 //		System.out.println(gsm.client.fromServer.readInt());
 			id = cm.getGameStateManager().client.fromServer.readInt();
+			cm.getGameStateManager().client.toServer.writeInt(frameWidth);
+			cm.getGameStateManager().client.toServer.writeInt(frameHeight);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		int frameWidth = cm.getGameStateManager().getWidth();
-		int frameHeight = cm.getGameStateManager().getHeight();
+		
 		Point2D p1pos = new Point2D.Double(frameWidth/4, frameHeight - 103);
 		Point2D p2pos = new Point2D.Double((frameWidth/4) * 3, frameHeight - 103);
 		if(id == 0){
@@ -50,19 +57,20 @@ public class PlayState extends GameState {
 			player1 = new Player(ImageHandler.getImage(ImageType.player2),p2pos);
 			player2 = new Player(ImageHandler.getImage(ImageType.player1),p1pos);
 		}
-		
+		playerIndication = new PlayerIndication(new Point2D.Double(cm.getGameStateManager().getWidth()-600, 0), id);
+		playerIndication.init();
 	}	
 	
 	@Override
 	public void draw(Graphics2D g2) {	
-//		g2.setColor(Color.GREEN);
-//		g2.drawLine(cm.getGameStateManager().getWidth()/2, 0, cm.getGameStateManager().getWidth()/2, cm.getGameStateManager().getHeight());
+		g2.drawImage(bg, 0, 0, null);
 		if(player1 != null){		
 			player2.draw(g2);
 			player1.draw(g2);
 			
 		}
 		
+		playerIndication.draw(g2);
 		drawRocks(g2,0);
 	}
 
@@ -91,12 +99,12 @@ public class PlayState extends GameState {
 		if(right && !left)
 		{
 			if(player1.getX() < cm.getGameStateManager().getWidth() - player1.getBounds().getWidth())
-				player1.setX(player1.getX()+5);
+				player1.setX(player1.getX()+8);
 		}
 		if(!right && left)
 		{
 			if(player1.getX() > 0)
-				player1.setX(player1.getX()-5);
+				player1.setX(player1.getX()-8);
 		}
 		
 		checkBarrelBounds();
@@ -108,7 +116,7 @@ public class PlayState extends GameState {
 		}
 		player1.update();
 		player2.update();
-		
+		playerIndication.update();
 	}
 
 	public void refreshData() throws IOException{
@@ -132,7 +140,7 @@ public class PlayState extends GameState {
 		
 		String[]barrelPosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
 		
-		if(rocks.size() < 20)
+		if(rocks.size() < 10)
 		{
 			rocks.add(	new Barrel(ImageHandler.getImage(ImageType.barrel), 
 						new Point2D.Double(Double.parseDouble(barrelPosition[0]),

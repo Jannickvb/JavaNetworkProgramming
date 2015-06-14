@@ -18,17 +18,17 @@ import view.ServerFrame;
 public class Server {	
 	
 	private List<Player> playerList;
-	private List<Lobby> lobbys;	
+	private List<Lobby> lobbies;	
 	private Thread lobbyUpdate;
 	
 	public Server(ServerFrame serverFrame){	
 		ServerSocket server = null;
 		playerList = new ArrayList<Player>();
-		lobbys = new ArrayList<Lobby>();
+		lobbies = new ArrayList<Lobby>();
 		serverFrame.button.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				serverFrame.jta.append("\nLobby size at: "+lobbys.size());				
+				serverFrame.jta.append("\nLobby size at: "+lobbies.size());				
 			}
 		});
 		lobbyUpdate = new Thread(new Runnable() {			
@@ -38,7 +38,7 @@ public class Server {
 				while(true){
 					if(count == 100){
 						count = 0;
-						Iterator<Lobby> lobbyIterator = lobbys.iterator();
+						Iterator<Lobby> lobbyIterator = lobbies.iterator();
 						while(lobbyIterator.hasNext()){					
 							if(!lobbyIterator.next().isRunning()){
 								lobbyIterator.remove();
@@ -64,9 +64,9 @@ public class Server {
 					 Lobby lobby = new Lobby(playerList);
 					 Thread thread = new Thread(lobby);
 					 thread.start();					 
-					 lobbys.add(lobby);	
+					 lobbies.add(lobby);	
 					 String[] huidigeTijd = new Date().toString().split("CEST");
-					 serverFrame.jta.append("\nEen nieuwe server is toegevoegd op "+huidigeTijd[0]+huidigeTijd[1]);
+					 serverFrame.jta.append("\nEen nieuwe Lobby is toegevoegd op "+huidigeTijd[0]+huidigeTijd[1]);
 					 playerList.clear();				
 				 }					 
 			 }
