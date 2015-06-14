@@ -1,10 +1,14 @@
 package serverScreen;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,19 +29,25 @@ public class ServerFrame extends JPanel implements ActionListener {
 	public JButton button;
 	private Timer paint;
 	
-	public static void main(String[] args){
+	public static void main(String[] args){			
 		ServerFrame server = new ServerFrame();
-		new Server(server);
+		new Server(server);		
 	}
 	
 	public ServerFrame(){
-		super(null);
+		super(null);		
 		JFrame frame = new JFrame("Server");
 		frame.setDefaultCloseOperation(3);
 		frame.setContentPane(this);
 		frame.setSize(400,300);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		try {
+			Image image = ImageIO.read(ServerFrame.class.getResource("/barrelServer.png"));
+			frame.setIconImage(new ImageIcon(image).getImage());
+		} catch (IOException e1) {			
+			e1.printStackTrace();
+		}
 		jta = new JTextArea();
 		button = new JButton("Show active lobbys");		
 		JScrollPane sp = new JScrollPane(jta);

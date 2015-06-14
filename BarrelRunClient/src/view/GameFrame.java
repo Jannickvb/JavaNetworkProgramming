@@ -7,6 +7,8 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 
 import control.ControlManager;
+import control.ImageHandler;
+import control.ImageHandler.ImageType;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame{
@@ -35,6 +37,7 @@ public class GameFrame extends JFrame{
 		setSize(800,600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(ImageHandler.getImage(ImageType.clientIcon));
 		setContentPane(new GamePanel(new ControlManager(this)));
 	}
 	
