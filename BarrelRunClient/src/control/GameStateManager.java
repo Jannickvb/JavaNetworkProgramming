@@ -60,5 +60,12 @@ public class GameStateManager {
 	
 	public void createClient(){
 		client = new ClientConnect();
-	}	
+	}
+	
+	public void closeClient(){
+		if(client != null){
+			client.close();
+		}
+		client = null;
+	}
 }

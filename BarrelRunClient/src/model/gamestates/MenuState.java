@@ -47,7 +47,10 @@ public class MenuState extends GameState {
 
 	@Override
 	public void init() {
-		startString = "Press enter to start";		
+		startString = "Press enter to start";
+		if(cm.getGameStateManager() != null){
+			cm.getGameStateManager().closeClient();
+		}
 	}
 
 }

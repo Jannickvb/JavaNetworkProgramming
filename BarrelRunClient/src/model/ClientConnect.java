@@ -20,4 +20,12 @@ public class ClientConnect {
 			System.err.println(e);
 		}
 	}
+	
+	public void close(){
+		try {
+			socket.close();
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
+	}
 }

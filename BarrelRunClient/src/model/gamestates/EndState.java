@@ -24,6 +24,7 @@ public class EndState extends GameState {
 	public void draw(Graphics2D g2) {
 		drawCenteredText("GAME OVER",300,g2);		
 		drawCenteredText(winStatus,400,g2);
+		drawCenteredText("Press enter to go back to the Menu", 500, g2);
 	}
 
 	public void drawCenteredText(String text,int y, Graphics2D g2){
@@ -38,7 +39,10 @@ public class EndState extends GameState {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_ENTER:
+			cm.getGameStateManager().setState(StateType.menu);
+		}
 	}
 
 	@Override

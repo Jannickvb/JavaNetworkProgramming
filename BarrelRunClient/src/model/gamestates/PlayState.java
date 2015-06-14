@@ -27,12 +27,12 @@ public class PlayState extends GameState {
 	private List<Barrel> rocks;
 	
 	public PlayState(ControlManager cm) {
-		super(cm);	
-		rocks = new ArrayList<Barrel>();		
+		super(cm);				
 	}
 	
 	@Override
 	public void init(){
+		rocks = new ArrayList<Barrel>();	
 		try{
 //		System.out.println(gsm.client.fromServer.readInt());
 			id = cm.getGameStateManager().client.fromServer.readInt();
