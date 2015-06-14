@@ -1,4 +1,4 @@
-package server;
+package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import serverScreen.ServerFrame;
+import model.Lobby;
+import model.Player;
+import view.ServerFrame;
 
 public class Server {	
 	

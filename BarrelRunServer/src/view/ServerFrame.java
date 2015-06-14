@@ -1,4 +1,4 @@
-package serverScreen;
+package view;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-import server.Server;
+import control.Server;
 
 public class ServerFrame extends JPanel implements ActionListener {
 
