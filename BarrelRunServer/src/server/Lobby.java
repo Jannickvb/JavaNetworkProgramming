@@ -23,9 +23,33 @@ public class Lobby implements Runnable {
 					players[i].toClient.writeUTF("go");
 					players[i].toClient.writeInt(i);
 			}
+			
 			double player1X,player2X,barrelX,barrelY,boundWidth = 800-103,boundHeight = 128;
 			String barrelPosition = "";
 			while(isRunning){
+				boolean statusp1 = players[0].fromClient.readBoolean();
+				boolean statusp2 = players[1].fromClient.readBoolean();
+				int id;
+				if(statusp1 || statusp2)
+				{
+					players[0].toClient.writeBoolean(true);
+					players[1].toClient.writeBoolean(true);
+					if(statusp1)
+					{
+						id = players[0].fromClient.readInt();
+					}
+					else
+					{
+						id = players[1].fromClient.readInt();
+					}
+					players[0].toClient.writeInt(id);
+					players[1].toClient.writeInt(id);
+					isRunning = false;
+				}else{
+					players[0].toClient.writeBoolean(false);
+					players[1].toClient.writeBoolean(false);
+				}
+				
 				//haal de coordinaten op vanuit de clients
 				player1X = players[0].fromClient.readDouble();
 				player2X = players[1].fromClient.readDouble();
@@ -41,6 +65,7 @@ public class Lobby implements Runnable {
 				barrelPosition = barrelX+":"+barrelY;
 				players[0].toClient.writeUTF(barrelPosition);
 				players[1].toClient.writeUTF(barrelPosition);
+				
 			}
 		}catch(IOException e){
 			e.printStackTrace();

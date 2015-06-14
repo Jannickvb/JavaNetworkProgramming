@@ -2,16 +2,19 @@ package model.gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.MyGeneric;
 import control.ControlManager;
 import control.GameStateManager.StateType;
 
 public class MenuState extends GameState {
 
 	private String startString;	
-	
+
 	public MenuState(ControlManager cm) {
-		super(cm);		
+		super(cm);
 	}
 
 	@Override
@@ -23,7 +26,7 @@ public class MenuState extends GameState {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

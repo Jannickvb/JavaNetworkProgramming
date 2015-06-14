@@ -31,7 +31,6 @@ public class GameStateManager {
 		gameStates.add(new MenuState(cm));
 		gameStates.add(new LoadingState(cm));
 		gameStates.add(new PlayState(cm));
-		gameStates.add(new EndState(cm));
 	}
 	
 	public enum StateType{
@@ -43,12 +42,20 @@ public class GameStateManager {
 		currentState.init();			
 	}
 	
+	public GameState getState(StateType type) throws IndexOutOfBoundsException{
+		return gameStates.get(type.ordinal());
+	}
+	
 	public int getWidth(){
 		return frame.getContentPane().getWidth();
 	}
 	
 	public int getHeight(){
 		return frame.getContentPane().getHeight();
+	}
+	
+	public void gameOver(){
+		gameStates.add(new EndState(cm));
 	}
 	
 	public void createClient(){

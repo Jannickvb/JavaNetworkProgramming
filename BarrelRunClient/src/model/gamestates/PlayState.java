@@ -23,6 +23,7 @@ public class PlayState extends GameState {
 	private Player player1,player2;
 	private int id;	
 	private boolean left,right;
+	public boolean win;
 	private List<Barrel> rocks;
 	
 	public PlayState(ControlManager cm) {
@@ -85,48 +86,66 @@ public class PlayState extends GameState {
 	@Override
 	public void update(){
 		
-		refreshData();
-		
 		//update je player
-		if(right && !left){
-			player1.setX(player1.getX()+5);
+		//TEMP: player movement limited to screen bounds
+		if(right && !left)
+		{
+			if(player1.getX() < cm.getGameStateManager().getWidth() - player1.getBounds().getWidth())
+				player1.setX(player1.getX()+5);
 		}
-		if(!right && left){
-			player1.setX(player1.getX()-5);
+		if(!right && left)
+		{
+			if(player1.getX() > 0)
+				player1.setX(player1.getX()-5);
 		}
 		
 		checkBarrelBounds();
-		checkPlayerCollision();
-		
+		try{
+			checkPlayerCollision();		
+			refreshData();
+		}catch(IOException e){
+			System.err.println("no connection with server");
+		}
 		player1.update();
 		player2.update();
+		
 	}
 
-	public void refreshData(){
-		try{
-			//schrijf je eigen positie weg
-			cm.getGameStateManager().client.toServer.writeDouble(player1.getX());
-			
-			//haal de positie van de andere op
-			player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
-			
-			String[]barrelPosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
-			if(rocks.size() < 20){
-				rocks.add(	new Barrel(ImageHandler.getImage(ImageType.barrel), 
-							new Point2D.Double(Double.parseDouble(barrelPosition[0]),
-											   Double.parseDouble(barrelPosition[1]))));
+	public void refreshData() throws IOException{
+		if(cm.getGameStateManager().client.fromServer.readBoolean())
+		{
+			int pID = cm.getGameStateManager().client.fromServer.readInt();
+			if(pID != id)
+				win = true;
+			else{
+				win = false;
 			}
-			
-		}catch(IOException e){
-			e.printStackTrace();
+			cm.getGameStateManager().gameOver();
+			cm.getGameStateManager().setState(StateType.end);
+		}
+		
+		//schrijf je eigen positie weg
+		cm.getGameStateManager().client.toServer.writeDouble(player1.getX());
+		
+		//haal de positie van de andere op
+		player2.setX(cm.getGameStateManager().client.fromServer.readDouble());
+		
+		String[]barrelPosition = cm.getGameStateManager().client.fromServer.readUTF().split(":");
+		
+		if(rocks.size() < 20)
+		{
+			rocks.add(	new Barrel(ImageHandler.getImage(ImageType.barrel), 
+						new Point2D.Double(Double.parseDouble(barrelPosition[0]),
+										   Double.parseDouble(barrelPosition[1]))));
 		}
 	}
 	
-	public void checkPlayerCollision(){
+	public void checkPlayerCollision() throws IOException{
+		cm.getGameStateManager().client.toServer.writeBoolean(false);
 		for(Barrel barrel:rocks)
 			if(player1.containsPoint(barrel)){
-				//temp
-				 cm.getGameStateManager().setState(StateType.end);
+				cm.getGameStateManager().client.toServer.writeBoolean(true);
+				cm.getGameStateManager().client.toServer.writeInt(id);
 			}
 	}
 	
